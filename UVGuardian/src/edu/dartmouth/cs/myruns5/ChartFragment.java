@@ -1,12 +1,14 @@
 package edu.dartmouth.cs.myruns5;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
-import org.achartengine.chart.BarChart.Type;
 import org.achartengine.chart.PointStyle;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
-import org.achartengine.renderer.SimpleSeriesRenderer;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
@@ -35,7 +37,6 @@ public class ChartFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		System.out.println("Chart Fragment Created!");
 		v = inflater.inflate(R.layout.chart_fragment, container, false);
 		data = ((MainActivity) this.getActivity()).getUVIFragment().getWebUVI();
 		//data = new float[]{1, 2, 4, 4, 7, 10, 11, 10, 9, 6, 5, 3, 2};
@@ -85,6 +86,7 @@ public class ChartFragment extends Fragment {
 		rg.setPointStyle(PointStyle.CIRCLE);
 		rg.setFillPoints(true);
 		rg.setDisplayChartValues(true);
+		rg.setChartValuesFormat(new DecimalFormat("0"));
 		rg.setChartValuesTextAlign(Align.CENTER);
 		rg.setChartValuesSpacing(24f);
 		rg.setChartValuesTextSize(40);
@@ -147,10 +149,12 @@ public class ChartFragment extends Fragment {
 	}
 
 	private void setChartSettings(XYMultipleSeriesRenderer renderer) {
-		renderer.setChartTitle("Online UVI Chart");
+		SimpleDateFormat sf = new SimpleDateFormat("MMM dd, yyyy");
+		renderer.setChartTitle("Hourly UVI Forecast\n" + sf.format(new Date()));
 		renderer.setLabelsColor(Color.BLUE);
 		renderer.setXTitle("Time (Hour)");
 		renderer.setYTitle("UV Index Level");
+		renderer.setMargins(new int[]{0, 55, 10, 15});
 		renderer.setApplyBackgroundColor(true);
 		renderer.setBackgroundColor(Color.parseColor("#D0E6FF"));
 		renderer.setXAxisMin(5);

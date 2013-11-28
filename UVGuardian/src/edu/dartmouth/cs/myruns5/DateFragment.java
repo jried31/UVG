@@ -41,7 +41,7 @@ public class DateFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		filename = ((MainActivity) this.getActivity()).getFileName();
+		//filename = ((MainActivity) this.getActivity()).getFileName();
 		v = inflater.inflate(R.layout.date_fragment, container, false);
 		mContext = this.getActivity();
 		Button datePick = (Button) v.findViewById(R.id.date_button);

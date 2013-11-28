@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -43,6 +44,7 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
+import android.os.RemoteException;
 import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
@@ -56,7 +58,8 @@ import com.parse.ParseQuery;
 
 public class UltravioletIndexService extends Service {
 
-	Geocoder gc = new Geocoder(this);
+	private LocationManager myTracksLocationManager;
+	private Geocoder gc;
 	private static float HOURLY_UVI_FORECAST[] = new float[13];// UV Hourly
 																// Forecast from
 																// 6am-6pm
@@ -64,8 +67,8 @@ public class UltravioletIndexService extends Service {
 	public static final String HOURLY_UV_INDEX = "HOURLY_UVI";
 	public static final String WEB_UVI = "WEB_UVI";
 	public static final String UVI_RECOMMENDATION = "UVI_RECOMMENDATION";
-	public static final long MIN_TIME_BW_UPDATES = 5000;
-	public static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
+	public static final long MIN_TIME_BW_UPDATES = 10000;
+	public static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 5000;
 
 	public static enum DAY_OF_WEEK {
 		SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;
@@ -85,8 +88,11 @@ public class UltravioletIndexService extends Service {
 	private NotificationManager nm;
 
 	private Location location = null;
-	private JSONParser parser;
+	//private JSONParser parser;
+	private Messenger messenger;
+	private String mes;
 
+	/*
 	public class JSONParser {
 		public JSONObject getJSONfromURL(String url) {
 
@@ -130,7 +136,8 @@ public class UltravioletIndexService extends Service {
 			}
 			return jObject;
 		}
-	}
+	}*/
+	
 
 	// Timer to periodically invoke updateUVITask
 	private final Timer timer = new Timer();
@@ -139,9 +146,14 @@ public class UltravioletIndexService extends Service {
 		public void run() {
 			// Do task of grabbing info here
 			// Looper.prepare();
-			Criteria criteria = new Criteria();
-			criteria.setAccuracy(Criteria.ACCURACY_COARSE);
-			criteria.setPowerRequirement(Criteria.POWER_LOW);
+			// location = getLocation(myTracksLocationManager);
+			/*
+			 * if(location == null) mes = "null"; else mes =
+			 * location.getLongitude() + "," + location.getLatitude(); final
+			 * Message message = Message.obtain(null, 1234, mes); try {
+			 * messenger.send(message); } catch (RemoteException exception) {
+			 * exception.printStackTrace(); }
+			 */
 			// criteria.setAltitudeRequired( false);
 			// criteria.setBearingRequired( false);
 			// riteria.setSpeedRequired( false);
@@ -169,25 +181,42 @@ public class UltravioletIndexService extends Service {
 		return uvIndex;
 	}
 
-	private void updateHourlyUVI(Location location) {
+	private void updateHourlyUVI(final Location location) {
+		Handler handler = new Handler(Looper.getMainLooper());
+
 		if (location == null) {
-			System.out.println("Location is null!");
-			return;
-		} else {
-			final double longitude = location.getLongitude();
-			final double latitude = location.getLatitude();
-			Handler handler = new Handler(Looper.getMainLooper());
+			NotificationCompat.Builder n = new NotificationCompat.Builder(this)
+					.setSmallIcon(R.drawable.runner)
+					.setContentTitle("UV notification")
+					.setAutoCancel(true)
+					.setContentText(
+							"GPS locating service is off, please turn it on!");
+			nm.notify(0, n.build());
+
 			handler.post(new Runnable() {
 				public void run() {
 					Toast.makeText(
 							mContext,
-							"Position located! Longitude: " + longitude
-									+ ", Latitude: " + latitude,
+							"GPS function is off. Please enable GPS locating service!",
 							Toast.LENGTH_LONG).show();
 				}
 			});
+			System.out.println("Location is null!");
+			return;
+		} else {
+			nm.cancel(0);
+			handler.post(new Runnable() {
+				public void run() {
+					Toast.makeText(
+							mContext,
+							"Position located! Longitude: "
+									+ location.getLongitude() + ", Latitude: "
+									+ location.getLatitude(), Toast.LENGTH_LONG)
+							.show();
+				}
+			});
 
-			ParseQuery<ParseObject> query = new ParseQuery("Test");
+			ParseQuery<ParseObject> query = new ParseQuery("UVData");
 			query.orderByDescending("createdAt");
 			query.findInBackground(new FindCallback<ParseObject>() {
 				public void done(List<ParseObject> objectList, ParseException e) {
@@ -228,7 +257,7 @@ public class UltravioletIndexService extends Service {
 
 		String responseString = null;
 		try {
-			String postCode = getAddress(location);
+			String postCode = getPostcode(location);
 
 			// curl --referer
 			// http://www.uvawareness.com/uv-index/uv-index.php?location=ucla
@@ -278,28 +307,30 @@ public class UltravioletIndexService extends Service {
 			Elements content = doc.getElementsByClass("fcDayCon");
 
 			for (Element fcDayCon : content) {
-				//System.out.println(fcDayCon.toString());
 				// Found the UVI data for the proper day
-
 				Element dayCon = fcDayCon.getElementsByClass("fcDate").first();
-				//System.out.println(dayCon.toString() + " | " + dayCon.html());
 
-				String day = dayCon.html().toUpperCase();
+				String day = dayCon.html().toUpperCase(Locale.US);
 				if (day.equals(DAY_OF_WEEK.values()[dayOfWeek - 1].name())) {
 					int it = 0;
 					Elements contents = fcDayCon.getElementsByClass("uval");
 					// Iteration of UVal values go from
 					// 6am,7,8,9,10,11,12pm,1,2,3,4,5,6pm
-					for (Element uval : contents) {
+					for (int i = 0; i < 13; i++) {
+						// If hour is 6am, 5pm and 6pm, no UVI then
+						if(i == 0 || i == 11 || i == 12){
+							HOURLY_UVI_FORECAST[i] = 0;
+							continue;
+						}
+						Element uval = contents.get(i);
 						String val = uval.html();
-						// System.out.println(val);
 
 						// val will return an empty string if no value present
 						if (val.equals(""))
-							HOURLY_UVI_FORECAST[it] = 1;
-						else
-							HOURLY_UVI_FORECAST[it] = Float.parseFloat(val);
-						it++;
+							HOURLY_UVI_FORECAST[i] = 1;
+						else {
+							HOURLY_UVI_FORECAST[i] = Float.parseFloat(val);
+						}
 					}
 
 					break;
@@ -309,17 +340,44 @@ public class UltravioletIndexService extends Service {
 		}
 	}
 
+	public String getPostcode(Location location) {
+		Geocoder geoCoder = new Geocoder(getApplicationContext(),
+				Locale.getDefault());
+		List<Address> address = null;
+		String postCode = "";
+		
+		if (geoCoder != null) {
+			try {
+				address = geoCoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			if (address.size() > 0) {
+				postCode = address.get(0).getPostalCode();
+			}
+		}
+		
+		return postCode;
+	}
+
+	/*
 	public String getAddress(Location location) {
 		String postCode = "";
 		parser = new JSONParser();
+		System.out.println(location.getLongitude() + ","
+				+ location.getLatitude());
 
 		String url = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
 				+ location.getLatitude() + "," + location.getLongitude()
 				+ "&sensor=true";
 		try {
 			JSONObject jsonObj = parser.getJSONfromURL(url);
+			if (jsonObj == null)
+				System.out.println("JSON is null!");
 			String Status = jsonObj.getString("status");
-			
+			System.out.println("status is " + Status);
+
 			if (Status.equalsIgnoreCase("OK")) {
 				JSONArray Results = jsonObj.getJSONArray("results");
 				JSONObject zero = Results.getJSONObject(0);
@@ -337,13 +395,10 @@ public class UltravioletIndexService extends Service {
 							|| long_name.length() > 0 || long_name != "") {
 						if (Type.equalsIgnoreCase("postal_code")) {
 							postCode = long_name;
+							System.out.println("long name is " + long_name);
 							System.out.println("Postal code is " + postCode);
 						}
 					}
-
-					// JSONArray mtypes = zero2.getJSONArray("types");
-					// String Type = mtypes.getString(0);
-					// Log.e(Type,long_name);
 				}
 			}
 		} catch (Exception e) {
@@ -351,8 +406,7 @@ public class UltravioletIndexService extends Service {
 		}
 
 		return postCode;
-	}
-	
+	}*/
 
 	public void sendData() {
 		if (hasData) {
@@ -382,41 +436,57 @@ public class UltravioletIndexService extends Service {
 	@Override
 	public void onCreate() {
 		mContext = getApplicationContext();
-		LocationManager myTracksLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		gc = new Geocoder(this);
+		myTracksLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		Criteria criteria = new Criteria();
+		criteria.setAccuracy(Criteria.ACCURACY_LOW);
+		String bestProvider = myTracksLocationManager.getBestProvider(criteria, true);
+		myTracksLocationManager.requestLocationUpdates(bestProvider,
+				MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES,
+				new LocationListener() {
+					@Override
+					public void onLocationChanged(Location location) {
+						// TODO Auto-generated method stub
+						setLocation(location);
+					}
+
+					@Override
+					public void onProviderDisabled(String provider) {
+						// TODO Auto-generated method stub
+						System.out.println("No provider enabled!");
+						setLocation(null);
+					}
+
+					@Override
+					public void onProviderEnabled(String provider) {
+						// TODO Auto-generated method stub
+						System.out.println("GPS provider enabled!");
+						setLocation(myTracksLocationManager
+								.getLastKnownLocation(LocationManager.GPS_PROVIDER));
+					}
+
+					@Override
+					public void onStatusChanged(String provider, int status,
+							Bundle extras) {
+						// TODO Auto-generated method stub
+					}
+				});
 		nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		location = getLocation(myTracksLocationManager);
 		Parse.initialize(this, "FJh8TX7N2OTxGVF2q48DurWCyDHLrwxnjw6M5Ode",
 				"Aes63AuagxerDz0Ygjv15loNpZhQ9fKz1ftM5ior");
-		Calendar now = Calendar.getInstance();
-		int minute = now.get(Calendar.MINUTE);// 24 hr format
-		long firstExecutionDelay = (updateInterval - minute)
-				* Globals.ONE_MINUTE;
+		/*
+		 * Calendar now = Calendar.getInstance(); int minute =
+		 * now.get(Calendar.MINUTE);// 24 hr format long firstExecutionDelay =
+		 * (updateInterval - minute) Globals.ONE_MINUTE;
+		 */
 		timer.scheduleAtFixedRate(updateUVITask, 0, 10000);
 		// super.onCreate();
 	}
 
-	private final LocationListener locationListener = new LocationListener() {
-
-		@Override
-		public void onLocationChanged(Location location) {
-			// TODO Auto-generated method stub
-		}
-
-		@Override
-		public void onProviderDisabled(String provider) {
-			// TODO Auto-generated method stub
-		}
-
-		@Override
-		public void onProviderEnabled(String provider) {
-			// TODO Auto-generated method stub
-		}
-
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-			// TODO Auto-generated method stub
-		}
-	};
+	private void setLocation(Location loc) {
+		location = loc;
+	}
 
 	public Location getLocation(LocationManager locationManager) {
 		try {
@@ -425,32 +495,10 @@ public class UltravioletIndexService extends Service {
 					.isProviderEnabled(LocationManager.GPS_PROVIDER);
 			if (!isGPSEnabled) {
 				// no network provider is enabled
-				NotificationCompat.Builder n = new NotificationCompat.Builder(
-						this)
-						.setSmallIcon(R.drawable.runner)
-						.setContentTitle("UV notification")
-						.setContentText(
-								"GPS locating service is off, please turn it on!");
-				n.setAutoCancel(true);
-				nm.notify(0, n.build());
-				Handler handler = new Handler(Looper.getMainLooper());
-				handler.post(new Runnable() {
-					public void run() {
-						Toast.makeText(
-								mContext,
-								"GPS function is off. Please enable GPS locating service!",
-								Toast.LENGTH_LONG).show();
-					}
-				});
-				System.out.println("No provider enabled!");
 				return null;
 			} else {
 				// if GPS Enabled get lat/long using GPS Services
-				System.out.println("GPS provider enabled!");
 				if (location == null) {
-					locationManager.requestLocationUpdates(
-							LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES,
-							MIN_DISTANCE_CHANGE_FOR_UPDATES, locationListener);
 					location = locationManager
 							.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 				}
@@ -465,76 +513,49 @@ public class UltravioletIndexService extends Service {
 		return location;
 	}
 
-	private static float getCurrentUVI() {
-		float currUVI = 0;
-		Calendar now = Calendar.getInstance();
-		int hour = now.get(Calendar.HOUR_OF_DAY);// 24 hr format
-		int nextHour = hour + 1;
-
-		if (hour < 6)// Hr < 6am
-			return currUVI;
-		else if (hour > 18)// Hr > 6pm
-			return currUVI;
-		else {
-
-			long currTime = now.getTimeInMillis();
-			Calendar prevHr = Calendar.getInstance();
-			prevHr.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH),
-					now.get(Calendar.DAY_OF_MONTH), hour, 0, 0);
-
-			Calendar currHr = Calendar.getInstance();
-			currHr.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH),
-					now.get(Calendar.DATE), hour, 0);
-
-			Calendar nextHr = Calendar.getInstance();
-			nextHr.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH),
-					now.get(Calendar.DATE), nextHour, 0);
-
-			float dtime = (currTime - prevHr.getTimeInMillis())
-					/ (nextHr.getTimeInMillis() - prevHr.getTimeInMillis());
-
-			// y=mx+b assuming linear scale time increase
-			hour -= 6;
-			nextHour -= 6;
-			// simple correction for the last index
-			if (nextHour == HOURLY_UVI_FORECAST.length)
-				nextHour = hour;
-
-			if (HOURLY_UVI_FORECAST[nextHour] > HOURLY_UVI_FORECAST[hour])
-				return dtime
-						* (HOURLY_UVI_FORECAST[nextHour] - HOURLY_UVI_FORECAST[hour])
-						+ HOURLY_UVI_FORECAST[hour];
-			else
-				return HOURLY_UVI_FORECAST[hour]
-						- dtime
-						* (HOURLY_UVI_FORECAST[hour] - HOURLY_UVI_FORECAST[nextHour]);
-		}
-	}
+	/*
+	 * private static float getCurrentUVI() { float currUVI = 0; Calendar now =
+	 * Calendar.getInstance(); int hour = now.get(Calendar.HOUR_OF_DAY);// 24 hr
+	 * format int nextHour = hour + 1;
+	 * 
+	 * if (hour < 6)// Hr < 6am return currUVI; else if (hour > 18)// Hr > 6pm
+	 * return currUVI; else {
+	 * 
+	 * long currTime = now.getTimeInMillis(); Calendar prevHr =
+	 * Calendar.getInstance(); prevHr.set(now.get(Calendar.YEAR),
+	 * now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH), hour, 0, 0);
+	 * 
+	 * Calendar currHr = Calendar.getInstance();
+	 * currHr.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH),
+	 * now.get(Calendar.DATE), hour, 0);
+	 * 
+	 * Calendar nextHr = Calendar.getInstance();
+	 * nextHr.set(now.get(Calendar.YEAR), now.get(Calendar.MONTH),
+	 * now.get(Calendar.DATE), nextHour, 0);
+	 * 
+	 * float dtime = (currTime - prevHr.getTimeInMillis()) /
+	 * (nextHr.getTimeInMillis() - prevHr.getTimeInMillis());
+	 * 
+	 * // y=mx+b assuming linear scale time increase hour -= 6; nextHour -= 6;
+	 * // simple correction for the last index if (nextHour ==
+	 * HOURLY_UVI_FORECAST.length) nextHour = hour;
+	 * 
+	 * if (HOURLY_UVI_FORECAST[nextHour] > HOURLY_UVI_FORECAST[hour]) return
+	 * dtime (HOURLY_UVI_FORECAST[nextHour] - HOURLY_UVI_FORECAST[hour]) +
+	 * HOURLY_UVI_FORECAST[hour]; else return HOURLY_UVI_FORECAST[hour] - dtime
+	 * (HOURLY_UVI_FORECAST[hour] - HOURLY_UVI_FORECAST[nextHour]); } }
+	 */
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if (intent == null)
 			return 0;
 		option = intent.getAction();
-		Bundle loc = intent.getExtras();
-		if (loc == null) {
-			System.out.println("Pass in location is null!");
-			location = null;
-		} else {
-			if (loc.get("Location") == null)
-				System.out.println("Pass in location parameter is null!");
-			location = (Location) loc.get("Location");
-		}
 
-		// Toast.makeText(getApplicationContext(), "Option #" + option,
-		// Toast.LENGTH_SHORT).show();
 		if (hasData) {
 			if (option.equals(CURRENT_UV_INDEX)) {
-				// float uvi = UltravioletIndexService.getCurrentUVI();
 				float uvi = getUVI();
 				if (uvi > 0) {
-					// Toast.makeText(getApplicationContext(), "Inside here #",
-					// Toast.LENGTH_SHORT).show();
 					Intent i = new Intent(CURRENT_UV_INDEX).putExtra(
 							CURRENT_UV_INDEX, uvi);
 					i.putExtra(WEB_UVI, HOURLY_UVI_FORECAST);

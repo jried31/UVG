@@ -1,31 +1,25 @@
 package edu.dartmouth.cs.myruns5;
 
-import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.Messenger;
 import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class CurrentUVIFragment extends Fragment {
 	Messenger myService = null;
@@ -33,16 +27,20 @@ public class CurrentUVIFragment extends Fragment {
 	private Timer timer;
 	private UVIBroadcastReciever reciever;
 	private IntentFilter filter;
-	private Location location;
 	private View v;
 	private float currentUVI = 0;
 	private ExecutorService executorService;
 	private float[] data;
-	
+	private Context context;
+	private NotificationManager nm;
+	private static final int ALERT_NOTIFICATION = 9;
+	private long[] vibrate = {400, 1000, 400, 1000, 400, 1000};
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		location = ((MainActivity) this.getActivity()).retrieveLoc();
+		context = this.getActivity();
+		nm = ( NotificationManager ) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		executorService = Executors.newSingleThreadExecutor();
 		executorService.submit(new Runnable() {
 			@Override
@@ -56,9 +54,10 @@ public class CurrentUVIFragment extends Fragment {
 		if (v == null)
 			System.out.println("View is null!");
 		else
-			v.setOnTouchListener(new SwipeListener(this.getActivity(), this
-					.getFragmentManager(), this, ((MainActivity) this.getActivity()).getChartFragment(),
-					((MainActivity) this.getActivity()).getRecommendFragment(), 1));
+			v.setOnTouchListener(new SwipeListener(context, this
+					.getFragmentManager(), this, ((MainActivity) context)
+					.getChartFragment(), ((MainActivity) context)
+					.getRecommendFragment(), 1));
 
 		updateDisplay(v);
 		return v;
@@ -72,8 +71,8 @@ public class CurrentUVIFragment extends Fragment {
 		}
 	};
 	final int updateInterval = 15;// minutes
-	
-	public UVIBroadcastReciever getReceiver(){
+
+	public UVIBroadcastReciever getReceiver() {
 		return reciever;
 	}
 
@@ -81,15 +80,14 @@ public class CurrentUVIFragment extends Fragment {
 		final Intent currentUVIIntent = new Intent(getActivity(),
 				UltravioletIndexService.class);
 		currentUVIIntent.setAction(UltravioletIndexService.CURRENT_UV_INDEX);
-		currentUVIIntent.putExtra("Location", location);
 		getActivity().startService(currentUVIIntent);
 	}
-	
-	private void updateDisplay(View v){
-		TextView currentUVIView = (TextView) v.findViewById(
-				R.id.current_uvi);
+
+	private void updateDisplay(View v) {
+		//currentUVI = 11;
+		TextView currentUVIView = (TextView) v.findViewById(R.id.current_uvi);
 		currentUVIView.setText(Float.toString(currentUVI));
-		switch((int)currentUVI){
+		switch ((int) currentUVI) {
 		case 0:
 		case 1:
 		case 2:
@@ -116,13 +114,28 @@ public class CurrentUVIFragment extends Fragment {
 			currentUVIView.setBackgroundResource(R.drawable.circle_purple);
 			break;
 		}
+		
+		if(currentUVI >= 8){
+			NotificationCompat.Builder mBuilder =
+			        new NotificationCompat.Builder(context)
+			        .setSmallIcon(R.drawable.alert)
+			        .setAutoCancel(true)
+			        .setContentTitle("UVI Alert")
+			        .setContentText("Your local UVI level is very high, please take care!")
+			        .setLights(0xFF00FF00, 400, 400)
+			        .setVibrate(vibrate);
+			Notification notif = mBuilder.build();
+			nm.notify(ALERT_NOTIFICATION, notif);
+		}
 	}
-	
-	public int getUVI(){
-		return (int)currentUVI;
+
+	public int getUVI() {
+		return (int) currentUVI;
 	}
-	
-	public float[] getWebUVI(){
+
+	public float[] getWebUVI() {
+		if(data == null)
+			return new float[13];
 		return data;
 	}
 
@@ -135,14 +148,6 @@ public class CurrentUVIFragment extends Fragment {
 			data = arg1.getExtras().getFloatArray(
 					UltravioletIndexService.WEB_UVI);
 			updateDisplay(v);
-			/*Calendar now = Calendar.getInstance();
-			int minute = now.get(Calendar.MINUTE);// 24 hr format
-			long firstExecutionDelay = (updateInterval - (minute % updateInterval))
-					* Globals.ONE_MINUTE;
-			
-			// Schedule the next execution for the next 15 minutes
-			//timer = new Timer();
-			//timer.schedule(updateUVITask, 15000);*/
 		}
 	}
 
