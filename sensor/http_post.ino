@@ -25,13 +25,9 @@ Notes:
 // You should change this to your own server. but you can use this setting 
 // for a demo. 
 //#define SETTING_WEBSERVER_URL       "https://ridekeepr.firebaseio.com/chase.json"
-//#define SETTING_WEBSERVER_URL       "http://50.23.122.235:8080/uv"
-//#define SETTING_WEBSERVER_URL       "http://uvg-ubuntu.cloudapp.net"
-#define SETTING_WEBSERVER_URL       "http://uvgserver-53558.usw1.actionbox.io:8080"
+#define SETTING_WEBSERVER_URL       "http://50.23.122.235:8080/uv"
 // Need to put your provider's APN here
-//#define SETTING_GSM_APN             "wholesale"
-#define SETTING_GSM_APN             "epc.tmobile.com"
-
+#define SETTING_GSM_APN             "wholesale"
 
 /**
  * HTTP is an expencive protocol that consumed a lot of bytes in the header. 
@@ -66,16 +62,11 @@ void DebugPrint( char * msg) {
     Serial.println( msg ); 
 }
 
-void my_http_post(){
-  GSM.println(1);
-  GSM.println(2);
-}
-
 void httpPost(double uvValues[])
 {
     // If we have GPS lock we should send the GPS data. 
-    //if( lastValid.signalLock ) {
-    if(1){  
+    if( lastValid.signalLock ) {
+      
       Serial.println("HTTP Post started...");      
     
     // Wake up the modem. 
@@ -112,85 +103,39 @@ void httpPost(double uvValues[])
     sim900.confirmAtCommand("OK",5000);
     
       char id[] = "{\"id\":\"";
-      //char lat[] = "\",\"lat\":\"";
-      //char lng[] = "\",\"lng\":\"";
+      char lat[] = "\",\"lat\":\"";
+      char lng[] = "\",\"lng\":\"";
       //char bat[] = "\",\"bat\":\"";
       //char sat[] = "\",\"sat\":\"";
-      //char uv[] = "\",\"uv\":\"";
-      
+      char uv[] = "\",\"uv\":\"";
       char spd[] = "\",\"spd\":\"";
       
       GSM.print("AT+HTTPDATA="); 
-      // DATA has to be at least DATASIZE bytes. If data is more than DATASIZE bytes, it is truncated. If size of data is less than DATASIZE, it cannot be sent.
-      #define DATASIZE 57
-      GSM.print(DATASIZE); 
+      GSM.print(87);
       GSM.println(",10000");
-      uint8_t return_value = sim900.confirmAtCommand("DOWNLOAD",5000);
-      Serial.print("return_value:");
-      Serial.println(return_value);
+      sim900.confirmAtCommand("DOWNLOAD",5000);
       
       Serial.print("Payload: "); 
 
       // ID - 9 Bytes
-      /*GSM.print(id);
+      GSM.print(id);
       Serial.print(id);
       
       GSM.print(phoneNumber);
       Serial.print(phoneNumber);
-      */
+      
       //UV
-      char uv[] = "{\"uv\":";
-      char lat[] = "\"lat\":\"";
-      char lng[] = "\"lng\":\"";
-      
       GSM.print(uv);
-      if(uvValues[0] >=0 && uvValues[0]<10){
-        GSM.print("\"");
-        GSM.print(" ");
-        GSM.print(uvValues[0],1);
-        GSM.print("\",");
-        
-        Serial.print("\"");
-        Serial.print(" ");
-        Serial.print(uvValues[0],1);
-        Serial.print("\",");
-      }
-      else if(uvValues[0] >= 10 && uvValues[0]< 100){
-        GSM.print("\"");
-        GSM.print(uvValues[0],1);
-        GSM.print("\",");
-        
-        Serial.print("\"");
-        Serial.print(uvValues[0],1);
-        Serial.print("\",");
-      }
-      else if(uvValues[0]>=100){
-        GSM.print("\"99.9\",");
-        Serial.print("\"99.9\",");
-      }
-      else{
-        GSM.print(" ");
-        GSM.print("\"0.0\",");
-        
-        Serial.print(" ");
-        Serial.print("\"0.0\",");
-      }
-      
-      //Serial.print(uv);
-      //Serial.print("\"5.5\",");
-      
-      /*
+      Serial.print(uv);
+       
       for(int i = 0; i < 10; i++){ 
         if(uvValues[i] >= 0){
-          GSM.print(" ");
-          Serial.print(" ");
+          GSM.print("+");
+          Serial.print("+");
         }
-        GSM.print(uvValues[i],1);
-        Serial.print(uvValues[i],1);
+        GSM.print(uvValues[i],3);
+        Serial.print(uvValues[i],3);
       }
-      */
-      
-     
       
       /*
       // Battery SOC - 3 Bytes
@@ -211,7 +156,7 @@ void httpPost(double uvValues[])
       */
       
       // Speed
-      /*GSM.print(spd);
+      GSM.print(spd);
       Serial.print(spd);
       
       if(lastValid.speed < 10){
@@ -225,33 +170,10 @@ void httpPost(double uvValues[])
       
       GSM.print(lastValid.speed);
       Serial.print(lastValid.speed);
-      */
+      
       // Latitude
       GSM.print(lat);
       Serial.print(lat);
-      
-
-      
-      double buffer = atof(lastValid.latitude + 2);
-      buffer = buffer/60.0 + (lastValid.latitude[0] - '0')*10 + (lastValid.latitude[1] - '0');
-      
-      //double my_lat = 38; //hard code for testing
-      double my_lat = buffer;
-      
-      if(my_lat < 10 &&  my_lat > -10){
-        GSM.print(" ");
-        Serial.print(" ");
-      }
-      
-      if(my_lat < 100 && my_lat > -100){
-        GSM.print(" ");
-        Serial.print(" ");
-      }
-      
-      if(my_lat <= 180 && my_lat >= -180){
-        GSM.print(" ");
-        Serial.print(" ");
-      }
       
       if(lastValid.ns == 'S') { 
         GSM.print("-"); 
@@ -262,39 +184,14 @@ void httpPost(double uvValues[])
         Serial.print("+");
       }
       
-      //GSM.print(buffer, 6);
-      GSM.print(my_lat, 6);
-      GSM.print("\",");
-      //Serial.print(buffer, 6);
-      Serial.print(my_lat, 6);
-      Serial.print("\",");
+      double buffer = atof(lastValid.latitude + 2);
+      buffer = buffer/60.0 + (lastValid.latitude[0] - '0')*10 + (lastValid.latitude[1] - '0');
+      GSM.print(buffer, 6);
+      Serial.print(buffer, 6);
       
-      // Longitude       
+      // Longitude
       GSM.print(lng);
       Serial.print(lng);
-      
-
-      
-      buffer = atof(lastValid.longitude + 3);
-      buffer = buffer/60.0 + (lastValid.longitude[0] - '0')*100 + (lastValid.longitude[1] - '0')*10 + (lastValid.longitude[2] - '0');
-      
-      //double my_lng = -118; // hard code for testing
-      double my_lng = buffer;
-	 
-      if(my_lng < 10 && my_lng > -10){
-        GSM.print(" ");
-        Serial.print(" ");
-      }
-      
-      if(my_lng < 100 && my_lng > -100){
-        GSM.print(" ");
-        Serial.print(" ");
-      }
-      
-      if(my_lng <= 180 && my_lng >= -180){
-        GSM.print("  ");
-        Serial.print("  ");
-      }
       
       if(lastValid.ew == 'W') { 
         GSM.print("-"); 
@@ -304,29 +201,23 @@ void httpPost(double uvValues[])
         GSM.print("+"); 
         Serial.print("+");
       }
-            
-      //GSM.print(buffer, 6);
-      GSM.print(my_lng, 6);
-      //Serial.print(buffer,6); 
-      Serial.print(my_lng,6); 
+      
+      buffer = atof(lastValid.longitude + 3);
+      buffer = buffer/60.0 + (lastValid.longitude[0] - '0')*100 + (lastValid.longitude[1] - '0')*10 + (lastValid.longitude[2] - '0');
+      GSM.print(buffer, 6);
+      Serial.print(buffer,6);  
       
       // End
       GSM.println("\"}");
       Serial.println("\"}");
-
-      Serial.print("my_lat = ");
-      Serial.println(my_lat);
-      Serial.print("my_lng = ");
-      Serial.println(my_lng);
-              
+      
        sim900.confirmAtCommand("OK",5000);
+      	
+      Serial.println("A");
       
       	GSM.println("AT+HTTPACTION=1"); //POST the data
-      	uint8_t return_val = sim900.confirmAtCommand("ACTION:",5000);
-        Serial.print("return_val:");
-        Serial.println(return_val);
-        //Serial.println("Result = ");
-        //Serial.println(result);    	
+      	sim900.confirmAtCommand("ACTION:",5000);
+      	
         delay (1000); 
         
           
@@ -378,7 +269,6 @@ uint8_t GetPhoneNumber() {
                     // Fits in the buffer 
                     strncpy( phoneNumber, startOfPhoneNumber, endOfPhoneNumber - startOfPhoneNumber ) ;                
                     phoneNumber[ endOfPhoneNumber - startOfPhoneNumber ] = 0 ; 
-                    Serial.println(phoneNumber);
                     return 1; 
                 }
             }

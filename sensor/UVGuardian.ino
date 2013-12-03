@@ -12,9 +12,9 @@ under CC-SA v3 license.
 #include "eepromAnything.h"
 #include <Time.h>
 
-#define USESPEED			0  //set to zero to free up code space if option is not needed
-#define USEMOTION			0  //set to zero to free up code space if option is not needed
-#define USEHTTPPOST			1  //set to zero to free up code space if option is not needed
+#define USESPEED			1  //set to zero to free up code space if option is not needed
+#define USEMOTION			1  //set to zero to free up code space if option is not needed
+#define USEHTTPPOST			0  //set to zero to free up code space if option is not needed
 #define USECALL                         1  //set to zero to disable sms commands
 
 GeogramONE ggo;
@@ -24,10 +24,6 @@ geoSmsData smsData;
 PA6C gps(&Serial); 
 goCoord lastValid;
 geoFence fence;
-
-unsigned long time_test;
-unsigned long setup_http_return;
-
 
 volatile uint8_t call;
 volatile uint8_t move;
@@ -79,9 +75,6 @@ char lat[] = "\",\"lat\":\"";
 char lng[] = "\",\"lng\":\"";
 char time[] = "\",\"time\":\"";
 
-double my_uv[] = {0,0};
-double uv_index = 0;
-
 void setup()
 {
         Serial.begin(9600);
@@ -106,8 +99,7 @@ void setup()
 	#endif
         #if USEHTTPPOST
         Serial.println("Starting HTTP...");
-        setup_http_return = GetPhoneNumber();
-        //setupHTTP();
+        setupHTTP();
         #endif // USEHTTPPOST
 
 	ggo.configureBreachParameters(&breachSpeed, &breachReps);
@@ -134,16 +126,7 @@ void setup()
 
 void loop()
 {
-        //Serial.print(1010);
-        //Serial.println("uv_test");
-	Serial.print("Time: ");
-        time_test = millis();
-        //prints time since program started
-        //Serial.println(time_test);
-        // wait a second so as not to send massive amounts of data
-        //delay(100);
-
-        if(!gps.getCoordinates(&lastValid))
+	if(!gps.getCoordinates(&lastValid))
 	{
 		int8_t tZ = EEPROM.read(TIMEZONE);
 		bool eM = EEPROM.read(ENGMETRIC);
@@ -205,14 +188,7 @@ void loop()
 	if(cmd3)
 		command3();
 	#endif
-      //if( lastValid.signalLock ) {
-      if( 1 ) {
-        
-        uv_index = (analogRead(sensorPin)-320.0)/25.0; 
-        my_uv[0] = uv_index;
-        httpPost(my_uv);
-        
-        
+      if( lastValid.signalLock ) {
         Serial.print(uv);
         Serial.print((analogRead(sensorPin)-320.0)/25.0);
         Serial.print(time);
@@ -257,7 +233,7 @@ void loop()
         // End
         Serial.println("\"}");
         
-        //delay(1000);
+        delay(1000);
       }
       
 	if(battery)

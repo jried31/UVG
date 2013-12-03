@@ -15,13 +15,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <resources>
-  <color name="white">#FFFFFFFF</color>
   <color name="black">#FF000000</color>
   <color name="gray">#FF444444</color>
-  <color name="orange">#FFFF6600</color>
-  <color name="red">#FFCC0000</color>
-  <color name="green">#FF008800</color>
-  <color name="yellow">#FFFFDD33</color>
-  <color name="purple">#FF6600FF</color>
-  <color name="blue">#FF66CCFF</color>
+  <color name="orange">#FFFAAD2C</color>
+  <color name="red">#FFBE161B</color>
 </resources>

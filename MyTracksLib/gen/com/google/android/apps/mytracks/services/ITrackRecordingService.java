@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: /Users/jried31/Documents/workspace/android/mytracksV2/MyTracksLib/src/com/google/android/apps/mytracks/services/ITrackRecordingService.aidl
+ * Original file: C:\\Users\\shuttlechess92\\Documents\\GitHub\\UVG\\MyTracksLib\\src\\com\\google\\android\\apps\\mytracks\\services\\ITrackRecordingService.aidl
  */
 package com.google.android.apps.mytracks.services;
 /**
