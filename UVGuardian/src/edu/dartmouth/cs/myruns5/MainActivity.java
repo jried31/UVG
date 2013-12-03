@@ -3,89 +3,95 @@ package edu.dartmouth.cs.myruns5;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.Spinner;
+import com.parse.Parse;
+import com.parse.ParseAnalytics;
+import com.parse.ParseObject;
+
+import com.fima.chartview.ChartView;
+import com.fima.chartview.LinearSeries;
+import com.fima.chartview.LinearSeries.LinearPoint;
 
 public class MainActivity extends Activity {
 	public static final String KEY_TAB_INDEX = "tab index";
 	public static final String ACTIVITY_TYPE = "activity type";
 	public static final String INPUT_TYPE = "input type";
 	public static final String TASK_TYPE = "task type";
-	private Context mContext;
-	private SharedPreferences sp;
-	CurrentUVIFragment uviFragment;
-	ChartFragment chartFragment;
-	RecommendFragment recommendFragment;
-	DateFragment dateFragment;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		// set up action bar
 
-		sp = this.getPreferences(MODE_PRIVATE);
-		saveSettings();
-		mContext = this;
-
-		final Intent currentUVIIntent = new Intent(this,
-				UltravioletIndexService.class);
+		
+		final Intent currentUVIIntent = new Intent(this, UltravioletIndexService.class);
 		currentUVIIntent.setAction(UltravioletIndexService.CURRENT_UV_INDEX);
 		startService(currentUVIIntent);
-
-		// set up action bar
+	    
+		
 		ActionBar bar = getActionBar();
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
+		
 		// create fragments
 		Fragment startFragment = new StartFragment();
 		Fragment historyFragment = new HistoryFragment();
 		Fragment settingsFragment = new SettingsFragment();
-		uviFragment = new CurrentUVIFragment();
-		chartFragment = new ChartFragment();
-		recommendFragment = new RecommendFragment();
-		// dateFragment = new DateFragment();
-
+		GraphFragment graphFragment = new GraphFragment();
+	//	Fragment uviFragment = new CurrentUVIFragment();
+		
+		//initialize parse
+		 Parse.initialize(this, "2zU6YnzC8DLSMJFuAOiLNr3MD6X0ryG52mZsxoo0", "m4rlzlSWyUvgcEkNULlVqRBlsX2iGRilskltCqYG"); 
+		
 		// create tabs
-		ActionBar.Tab startTab = bar.newTab().setText(
-				getString(R.string.startTab_title));
-		startTab.setTabListener(new MyTabListener(startFragment, mContext));
-
-		ActionBar.Tab historyTab = bar.newTab().setText(
-				getString(R.string.historyTab_title));
-		historyTab.setTabListener(new MyTabListener(historyFragment, mContext));
-
-		ActionBar.Tab settingsTab = bar.newTab().setText(
-				getString(R.string.settingsTab_title));
-		settingsTab
-				.setTabListener(new MyTabListener(settingsFragment, mContext));
-
-		ActionBar.Tab uviTab = bar.newTab().setText(
-				getString(R.string.uviTab_title));
-		uviTab.setTabListener(new MyTabListener(uviFragment, mContext));
-
+		ActionBar.Tab startTab = bar.newTab().setText(getString(R.string.startTab_title));
+		startTab.setTabListener(new MyTabListener(startFragment, getApplicationContext()));
+		
+		ActionBar.Tab historyTab = bar.newTab().setText(getString(R.string.historyTab_title));
+		historyTab.setTabListener(new MyTabListener(historyFragment, getApplicationContext()));
+		
+		ActionBar.Tab settingsTab = bar.newTab().setText(getString(R.string.settingsTab_title));
+		settingsTab.setTabListener(new MyTabListener(settingsFragment, getApplicationContext()));
+		
+		
+		ActionBar.Tab graphTab = bar.newTab().setText(getString(R.string.graphTab_title));
+		graphTab.setTabListener(new MyTabListener(graphFragment, getApplicationContext()));
+		
+	//	ActionBar.Tab uviTab = bar.newTab().setText(getString(R.string.uviTab_title));
+	//	uviTab.setTabListener(new MyTabListener(uviFragment, getApplicationContext()));
+		
+		
 		// add tabs
 		bar.addTab(startTab);
 		bar.addTab(historyTab);
 		bar.addTab(settingsTab);
-		bar.addTab(uviTab);
-
+		bar.addTab(graphTab);
+	//	bar.addTab(uviTab);
+		
+		
+		// this code may be redundant
+		// track statistics around parse
+		ParseAnalytics.trackAppOpened(getIntent());
+		//testing parse
+		ParseObject testObject = new ParseObject("TestObject");
+		testObject.put("foo", "bar");
+		testObject.saveInBackground();
+		
+		
 		// resume state if applicable
-		if (savedInstanceState != null) {
-			bar.setSelectedNavigationItem(savedInstanceState
-					.getInt(KEY_TAB_INDEX));
+		if (savedInstanceState != null){
+			bar.setSelectedNavigationItem(savedInstanceState.getInt(KEY_TAB_INDEX));
 		}
 	}
+
+		
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,165 +99,66 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	
 	@Override
-	public void onResume() {
-		super.onResume();
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		if (uviFragment.getReceiver() != null)
-			this.unregisterReceiver(uviFragment.getReceiver());
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-		if (uviFragment.getReceiver() != null)
-			this.unregisterReceiver(uviFragment.getReceiver());
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
+	protected void onSaveInstanceState(Bundle outState){
 		super.onSaveInstanceState(outState);
-		outState.putInt(KEY_TAB_INDEX, getActionBar()
-				.getSelectedNavigationIndex());
+		outState.putInt(KEY_TAB_INDEX, getActionBar().getSelectedNavigationIndex());
 	}
 
-	
-	
-	public boolean getShowHintStatus() {
-		return sp.getBoolean("ShowHintStatus", true);
-	}
+	public void onStartClicked(View view){
+	    // check input type
+	    Spinner spinner = (Spinner)findViewById(R.id.Spinner_InputType);
+	    int pos = spinner.getSelectedItemPosition();
+	    Intent intent;
+	    switch(pos){
+	    case 0:
+		    intent = new Intent(this, ManualInputActivity.class);
+		    break;
+	    case 1:
+	    case 2:
+		    intent = new Intent(this, MapDisplayActivity.class);
+		    break;
+	    default:
+		    intent = new Intent(this, MapDisplayActivity.class);
+	    }
+	    
+	    // put extra
+	    intent.putExtra(INPUT_TYPE, pos);
 
-	public void setShowHintStatus(boolean hint) {
-		SharedPreferences.Editor editor = sp.edit();
-		editor.remove("ShowHintStatus");
-		editor.putBoolean("ShowHintStatus", hint);
-		editor.commit();
-	}
-
-	private void saveSettings() {
-		if (sp.contains("ShowHintStatus")) {
-			return;
-		} else {
-			SharedPreferences.Editor editor = sp.edit();
-			editor.putBoolean("ShowHintStatus", true);
-			editor.commit();
-		}
-	}
-
-	public CurrentUVIFragment getUVIFragment() {
-		return uviFragment;
-	}
-
-	public ChartFragment getChartFragment() {
-		return chartFragment;
-	}
-
-	public RecommendFragment getRecommendFragment() {
-		return recommendFragment;
-	}
-
-	public void onStartClicked(View view) {
-		// check input type
-		Spinner spinner = (Spinner) findViewById(R.id.Spinner_InputType);
-		int pos = spinner.getSelectedItemPosition();
-		Intent intent;
-		switch (pos) {
-		case 0:
-			intent = new Intent(this, ManualInputActivity.class);
-			break;
-		case 1:
-		case 2:
-			intent = new Intent(this, MapDisplayActivity.class);
-			break;
-		default:
-			intent = new Intent(this, MapDisplayActivity.class);
-		}
-
-		// put extra
-		intent.putExtra(INPUT_TYPE, pos);
-
-		spinner = (Spinner) findViewById(R.id.Spinner_ActivityType);
-		pos = spinner.getSelectedItemPosition();
-		intent.putExtra(ACTIVITY_TYPE, pos);
-		intent.putExtra(TASK_TYPE, Globals.TASK_TYPE_NEW);
-
-		// fire intent
-		startActivity(intent);
+	    spinner = (Spinner)findViewById(R.id.Spinner_ActivityType);
+	    pos = spinner.getSelectedItemPosition();
+	    intent.putExtra(ACTIVITY_TYPE, pos);
+	    intent.putExtra(TASK_TYPE, Globals.TASK_TYPE_NEW);
+	    
+	    // fire intent
+	    startActivity(intent);
 
 	}
 }
 
-
-
-class MyTabListener implements ActionBar.TabListener {
-	private Fragment mFragment;
-	private Context mContext;
-	private boolean hint;
-	private CheckBox doNotShowHint;
-
-	public MyTabListener(Fragment frgmt, Context cntxt) {
-		mFragment = frgmt;
-		mContext = cntxt;
+class MyTabListener implements ActionBar.TabListener{
+	public Fragment mFragment;
+	public Context mContext;
+	
+	public MyTabListener(Fragment frgmt, Context cntxt){
+		mFragment = frgmt; mContext = cntxt;
 	}
-
-	public void createDialog(boolean hint) {
-		if (!hint)
-			return;
-		else {
-			AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-			LayoutInflater adbInflater = LayoutInflater.from(mContext);
-			View hintLayout = adbInflater.inflate(R.layout.show_hint, null);
-			doNotShowHint = (CheckBox) hintLayout.findViewById(R.id.skip);
-			builder.setView(hintLayout);
-			builder.setTitle("Swipe Hint");
-			builder.setMessage("You can swipe left and right to see different contents of UVI!\n\n");
-			builder.setIcon(R.drawable.hint1);
-
-			// Setting OK Button
-			builder.setPositiveButton("OK",
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int which) {
-							// Write your code here to execute after dialog
-							// closed
-							if (doNotShowHint.isChecked()) {
-								System.out.println("The checkbox is checked!");
-								((MainActivity) mContext)
-										.setShowHintStatus(false);
-							}
-						}
-					});
-
-			// Showing Alert Message
-			AlertDialog alertDialog = builder.create();
-			alertDialog.show();
-		}
-	}
-
+	
 	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		if (tab.getText().equals("UVI")) {
-			hint = ((MainActivity) mContext).getShowHintStatus();
-			createDialog(hint);
-		}
+	public void onTabSelected(Tab tab, FragmentTransaction ft){
 		ft.replace(R.id.fragment_container, mFragment);
-		// Toast.makeText(mContext, "onTabSelected", Toast.LENGTH_SHORT).show();
+//		Toast.makeText(mContext, "onTabSelected", Toast.LENGTH_SHORT).show();
 	}
-
+	
 	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		// Toast.makeText(mContext, "onTabReSelected",
-		// Toast.LENGTH_SHORT).show();
+	public void onTabReselected(Tab tab, FragmentTransaction ft){
+//		Toast.makeText(mContext, "onTabReSelected", Toast.LENGTH_SHORT).show();		
 	}
-
+	
 	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+	public void onTabUnselected(Tab tab, FragmentTransaction ft){
 		ft.remove(mFragment);
-		// Toast.makeText(mContext, "onTabUnSelected",
-		// Toast.LENGTH_SHORT).show();
+//		Toast.makeText(mContext, "onTabUnSelected", Toast.LENGTH_SHORT).show();		
 	}
 }
