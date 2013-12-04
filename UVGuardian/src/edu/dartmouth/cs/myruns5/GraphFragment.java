@@ -1,21 +1,18 @@
 package edu.dartmouth.cs.myruns5;
 
-
-
-
-
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
 import android.app.Fragment;
-
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 
 //at the moment it is a PreferenceFragment 
@@ -36,6 +33,14 @@ public class GraphFragment extends Fragment {
 	             public void onClick(View v) {
 	                 // Perform action on click
 	            	 showGraphActivity();
+	             }
+	         });
+	         
+	         Button addFriend = (Button) graphMain.findViewById(R.id.button_add_friend);
+	         addFriend.setOnClickListener(new View.OnClickListener() {
+	             public void onClick(View v) {
+	                 // Perform action on click
+	            	 showFriendsList();
 	             }
 	         });
 
@@ -74,7 +79,22 @@ public class GraphFragment extends Fragment {
 		startActivity(intent);
 	}
 	
+	public void showFriendsList() {
+		
+		//Context context = getApplicationContext();
+		Context context = getActivity();
+		CharSequence text = "Opening friends list!";
+		int duration = Toast.LENGTH_SHORT;
 
-
-
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
+		
+		FriendsFragment friendsFragment = new FriendsFragment();
+		
+		FragmentTransaction ft  = getFragmentManager().beginTransaction();
+		ft.replace(((ViewGroup)getView().getParent()).getId(), friendsFragment);
+		ft.addToBackStack(null);
+		ft.commit();
+		
+	}
 }
