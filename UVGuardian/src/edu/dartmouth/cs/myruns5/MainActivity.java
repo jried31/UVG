@@ -15,9 +15,7 @@ import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseObject;
 
-import com.fima.chartview.ChartView;
-import com.fima.chartview.LinearSeries;
-import com.fima.chartview.LinearSeries.LinearPoint;
+
 
 public class MainActivity extends Activity {
 	public static final String KEY_TAB_INDEX = "tab index";

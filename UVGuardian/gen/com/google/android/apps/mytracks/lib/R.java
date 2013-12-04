@@ -11,17 +11,17 @@ public final class R {
 		public static final int ic_launcher_my_tracks = 0x7f02003d;
 	}
 	public static final class string {
-		public static final int broadcast_notifications_permission = 0x7f06001b;
-		public static final int lib_name = 0x7f06001a;
-		public static final int mytracks_service_class = 0x7f060024;
-		public static final int mytracks_service_package = 0x7f060025;
-		public static final int read_track_data_permission = 0x7f06001c;
-		public static final int track_id_broadcast_extra = 0x7f06001e;
-		public static final int track_paused_broadcast_action = 0x7f06001f;
-		public static final int track_resumed_broadcast_action = 0x7f060020;
-		public static final int track_started_broadcast_action = 0x7f060021;
-		public static final int track_stopped_broadcast_action = 0x7f060022;
-		public static final int track_update_broadcast_action = 0x7f060023;
-		public static final int write_track_data_permission = 0x7f06001d;
+		public static final int broadcast_notifications_permission = 0x7f08001a;
+		public static final int lib_name = 0x7f080019;
+		public static final int mytracks_service_class = 0x7f080023;
+		public static final int mytracks_service_package = 0x7f080024;
+		public static final int read_track_data_permission = 0x7f08001b;
+		public static final int track_id_broadcast_extra = 0x7f08001d;
+		public static final int track_paused_broadcast_action = 0x7f08001e;
+		public static final int track_resumed_broadcast_action = 0x7f08001f;
+		public static final int track_started_broadcast_action = 0x7f080020;
+		public static final int track_stopped_broadcast_action = 0x7f080021;
+		public static final int track_update_broadcast_action = 0x7f080022;
+		public static final int write_track_data_permission = 0x7f08001c;
 	}
 }
