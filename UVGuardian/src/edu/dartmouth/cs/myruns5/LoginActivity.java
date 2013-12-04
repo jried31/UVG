@@ -31,6 +31,7 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.main);
 		 Parse.initialize(this, "2zU6YnzC8DLSMJFuAOiLNr3MD6X0ryG52mZsxoo0", "m4rlzlSWyUvgcEkNULlVqRBlsX2iGRilskltCqYG");
 		 ParseFacebookUtils.initialize("613060905424062");
+		 
 		 loginButton = (Button) findViewById(R.id.loginButton);
 		loginButton.setOnClickListener(new View.OnClickListener() {
 			@Override

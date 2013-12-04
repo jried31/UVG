@@ -418,7 +418,7 @@ containing a value of this type.
         public static final int com_facebook_list_section_header_background=0x7f02000f;
         public static final int com_facebook_loginbutton_silver=0x7f020010;
         public static final int com_facebook_logo=0x7f020011;
-        public static final int com_facebook_picker_default_separator_color=0x7f020043;
+        public static final int com_facebook_picker_default_separator_color=0x7f020044;
         public static final int com_facebook_picker_item_background=0x7f020012;
         public static final int com_facebook_picker_list_focused=0x7f020013;
         public static final int com_facebook_picker_list_longpressed=0x7f020014;
@@ -462,12 +462,13 @@ containing a value of this type.
         public static final int default_profile=0x7f02003a;
         public static final int greend=0x7f02003b;
         public static final int ic_launcher=0x7f02003c;
-        public static final int login_button_focused=0x7f02003d;
-        public static final int login_button_normal=0x7f02003e;
-        public static final int login_button_pressed=0x7f02003f;
-        public static final int runner=0x7f020040;
-        public static final int table_round_shape=0x7f020041;
-        public static final int uviscale=0x7f020042;
+        public static final int ic_launcher_my_tracks=0x7f02003d;
+        public static final int login_button_focused=0x7f02003e;
+        public static final int login_button_normal=0x7f02003f;
+        public static final int login_button_pressed=0x7f020040;
+        public static final int runner=0x7f020041;
+        public static final int table_round_shape=0x7f020042;
+        public static final int uviscale=0x7f020043;
     }
     public static final class id {
         public static final int ButtonCancel=0x7f05002f;
@@ -577,50 +578,55 @@ containing a value of this type.
         public static final int com_facebook_placepickerfragment_list_row=0x7f030010;
         public static final int com_facebook_search_bar_layout=0x7f030011;
         public static final int com_facebook_usersettingsfragment=0x7f030012;
-        public static final int fragment_graph=0x7f030013;
-        public static final int fragment_graph_main=0x7f030014;
-        public static final int fragment_history=0x7f030015;
-        public static final int fragment_start=0x7f030016;
-        public static final int main=0x7f030017;
-        public static final int test=0x7f030018;
-        public static final int userdetails=0x7f030019;
-        public static final int uvg_fragment_current_uvi=0x7f03001a;
+        public static final int fragment_friends=0x7f030013;
+        public static final int fragment_graph=0x7f030014;
+        public static final int fragment_graph_main=0x7f030015;
+        public static final int fragment_history=0x7f030016;
+        public static final int fragment_start=0x7f030017;
+        public static final int main=0x7f030018;
+        public static final int test=0x7f030019;
+        public static final int userdetails=0x7f03001a;
+        public static final int uvg_fragment_current_uvi=0x7f03001b;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
     }
     public static final class string {
-        public static final int HistoryFragment_prompt=0x7f060071;
-        public static final int RadioButtonGenderFemale=0x7f060095;
-        public static final int RadioButtonGenderMale=0x7f060096;
-        public static final int SettingsFragment_prompt=0x7f060072;
-        public static final int StartFragment_ActivityType=0x7f060050;
-        public static final int StartFragment_InputType=0x7f06004f;
-        public static final int StartFragment_prompt=0x7f060070;
-        public static final int account_preference_title=0x7f060073;
-        public static final int action_settings=0x7f060047;
-        public static final int additional_settings_title=0x7f060074;
-        public static final int app_id=0x7f060045;
-        public static final int app_name=0x7f060046;
+        public static final int HistoryFragment_prompt=0x7f06007d;
+        public static final int RadioButtonGenderFemale=0x7f0600a1;
+        public static final int RadioButtonGenderMale=0x7f0600a2;
+        public static final int SettingsFragment_prompt=0x7f06007e;
+        public static final int StartFragment_ActivityType=0x7f06005c;
+        public static final int StartFragment_InputType=0x7f06005b;
+        public static final int StartFragment_prompt=0x7f06007c;
+        public static final int account_preference_title=0x7f06007f;
+        public static final int action_settings=0x7f060053;
+        public static final int additional_settings_title=0x7f060080;
+        public static final int app_id=0x7f060051;
+        public static final int app_name=0x7f060052;
         /**   Title for notification shown when GooglePlayServices is unavailable [CHAR LIMIT=70] 
          */
-        public static final int auth_client_availability_notification_title=0x7f060029;
+        public static final int auth_client_availability_notification_title=0x7f060035;
         /**   Title for notification shown when GooglePlayServices is unavailable [CHAR LIMIT=42] 
          */
-        public static final int auth_client_play_services_err_notification_msg=0x7f06002a;
+        public static final int auth_client_play_services_err_notification_msg=0x7f060036;
         /**   Requested by string saying which app requested the notification. [CHAR LIMIT=42] 
          */
-        public static final int auth_client_requested_by_msg=0x7f06002b;
-        public static final int avatar_description=0x7f060082;
-        public static final int button_cancel=0x7f06009a;
-        public static final int button_change=0x7f060084;
-        public static final int button_save=0x7f060099;
-        public static final int button_start=0x7f060051;
-        public static final int camara_photo_picker_dialog=0x7f060085;
-        public static final int class_homepage_summary=0x7f06007f;
-        public static final int class_homepage_title=0x7f06007e;
-        public static final int collect_accelerometer=0x7f060032;
-        public static final int collect_light=0x7f060033;
+        public static final int auth_client_requested_by_msg=0x7f060037;
+        public static final int avatar_description=0x7f06008e;
+        /**  Do not translate 
+ Permissions, need to be in sync with the permissions in AndroidManifest.xml 
+         */
+        public static final int broadcast_notifications_permission=0x7f06001b;
+        public static final int button_cancel=0x7f0600a6;
+        public static final int button_change=0x7f060090;
+        public static final int button_save=0x7f0600a5;
+        public static final int button_start=0x7f06005d;
+        public static final int camara_photo_picker_dialog=0x7f060091;
+        public static final int class_homepage_summary=0x7f06008b;
+        public static final int class_homepage_title=0x7f06008a;
+        public static final int collect_accelerometer=0x7f06003e;
+        public static final int collect_light=0x7f06003f;
         public static final int com_facebook_choose_friends=0x7f060010;
         public static final int com_facebook_dialogloginactivity_ok_button=0x7f060001;
         public static final int com_facebook_internet_permission_error_message=0x7f060014;
@@ -646,87 +652,90 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_log_in_button=0x7f060009;
         public static final int com_facebook_usersettingsfragment_logged_in=0x7f06000a;
         public static final int com_facebook_usersettingsfragment_not_logged_in=0x7f06000b;
-        public static final int comment_dialogTitle=0x7f06007d;
-        public static final int comment_summary=0x7f06007c;
-        public static final int comment_title=0x7f06007b;
+        public static final int comment_dialogTitle=0x7f060089;
+        public static final int comment_summary=0x7f060088;
+        public static final int comment_title=0x7f060087;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_enable_button=0x7f060020;
+        public static final int common_google_play_services_enable_button=0x7f06002c;
         /**  Message in confirmation dialog informing user they need to enable
         Google Play services in application settings [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_enable_text=0x7f06001f;
+        public static final int common_google_play_services_enable_text=0x7f06002b;
         /**  Title of confirmation dialog informing user they need to enable
         Google Play services in application settings [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_enable_title=0x7f06001e;
+        public static final int common_google_play_services_enable_title=0x7f06002a;
         /**  Button in confirmation dialog for installing Google Play services [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_install_button=0x7f06001d;
+        public static final int common_google_play_services_install_button=0x7f060029;
         /**  (For phones) Message in confirmation dialog informing user that
         they need to install Google Play services (from Play Store) [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_install_text_phone=0x7f06001b;
+        public static final int common_google_play_services_install_text_phone=0x7f060027;
         /**  (For tablets) Message in confirmation dialog informing user that
         they need to install Google Play services (from Play Store) [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_install_text_tablet=0x7f06001c;
+        public static final int common_google_play_services_install_text_tablet=0x7f060028;
         /**  Title of confirmation dialog informing user that they need to install
         Google Play services (from Play Store) [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_install_title=0x7f06001a;
+        public static final int common_google_play_services_install_title=0x7f060026;
         /**  Message in confirmation dialog informing user there is an unknown issue in Google Play
         services [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_unknown_issue=0x7f060023;
+        public static final int common_google_play_services_unknown_issue=0x7f06002f;
         /**  Message in confirmation dialog informing user that Google Play services is not supported on their device [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_unsupported_text=0x7f060025;
+        public static final int common_google_play_services_unsupported_text=0x7f060031;
         /**  Title of confirmation dialog informing user that Google Play services is not supported on their device [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_unsupported_title=0x7f060024;
+        public static final int common_google_play_services_unsupported_title=0x7f060030;
         /**  Button in confirmation dialog for updating Google Play services [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_update_button=0x7f060026;
+        public static final int common_google_play_services_update_button=0x7f060032;
         /**  Message in confirmation dialog informing user that they need to update
         Google Play services (from Play Store) [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_update_text=0x7f060022;
+        public static final int common_google_play_services_update_text=0x7f06002e;
         /**  Title of confirmation dialog informing user that they need to update
         Google Play services (from Play Store) [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_update_title=0x7f060021;
+        public static final int common_google_play_services_update_title=0x7f06002d;
         /**  Sign-in button text [CHAR LIMIT=15] 
          */
-        public static final int common_signin_button_text=0x7f060027;
+        public static final int common_signin_button_text=0x7f060033;
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
-        public static final int common_signin_button_text_long=0x7f060028;
-        public static final int current_uvi_description=0x7f060031;
-        public static final int current_uvi_title=0x7f060030;
-        public static final int data_Birthday=0x7f0600a5;
-        public static final int data_Class=0x7f0600a3;
-        public static final int data_Email=0x7f0600a0;
-        public static final int data_GenderF=0x7f0600a1;
-        public static final int data_GenderM=0x7f0600a2;
-        public static final int data_Major=0x7f0600a4;
-        public static final int data_Name=0x7f06009e;
-        public static final int data_Phone=0x7f06009f;
-        public static final int date_of_birth=0x7f06004d;
-        public static final int dialog_comment_hint=0x7f06005d;
-        public static final int feet=0x7f060068;
-        public static final int gallery_photo_picker_dialog=0x7f060086;
-        public static final int gender=0x7f06004c;
-        public static final int graphTab_title=0x7f06006f;
-        public static final int hint_Email=0x7f060091;
-        public static final int hint_Name=0x7f06008f;
-        public static final int hint_Phone=0x7f060098;
-        public static final int hint_birthday=0x7f06008b;
-        public static final int historyTab_title=0x7f06006c;
-        public static final int kilometers=0x7f060066;
-        public static final int location=0x7f06004b;
+        public static final int common_signin_button_text_long=0x7f060034;
+        public static final int current_uvi_description=0x7f06003d;
+        public static final int current_uvi_title=0x7f06003c;
+        public static final int data_Birthday=0x7f0600b1;
+        public static final int data_Class=0x7f0600af;
+        public static final int data_Email=0x7f0600ac;
+        public static final int data_GenderF=0x7f0600ad;
+        public static final int data_GenderM=0x7f0600ae;
+        public static final int data_Major=0x7f0600b0;
+        public static final int data_Name=0x7f0600aa;
+        public static final int data_Phone=0x7f0600ab;
+        public static final int date_of_birth=0x7f060059;
+        public static final int dialog_comment_hint=0x7f060069;
+        public static final int feet=0x7f060074;
+        public static final int gallery_photo_picker_dialog=0x7f060092;
+        public static final int gender=0x7f060058;
+        public static final int graphTab_title=0x7f06007b;
+        public static final int hint_Email=0x7f06009d;
+        public static final int hint_Name=0x7f06009b;
+        public static final int hint_Phone=0x7f0600a4;
+        public static final int hint_birthday=0x7f060097;
+        public static final int historyTab_title=0x7f060078;
+        public static final int kilometers=0x7f060072;
+        /**  Do not translate 
+         */
+        public static final int lib_name=0x7f06001a;
+        public static final int location=0x7f060057;
         /**  Location client code resources (prefix with location_client) 
 
         Begin strings for location.reporting
@@ -735,81 +744,95 @@ containing a value of this type.
         Some InactiveReason names.  See more in OneUp/package/location/res/values/strings.xml
     
          */
-        public static final int location_client_ulr_inactive_age_under_13=0x7f06002c;
-        public static final int location_client_ulr_inactive_age_unknown=0x7f06002d;
-        public static final int location_client_ulr_inactive_unknown_restriction=0x7f06002e;
-        public static final int login=0x7f060048;
-        public static final int login_intro=0x7f06004a;
-        public static final int logout=0x7f060049;
-        public static final int mile_per_hr=0x7f060069;
-        public static final int miles=0x7f060067;
-        public static final int misc_title=0x7f060075;
-        public static final int msg_cancel=0x7f06009b;
-        public static final int msg_later=0x7f06009d;
-        public static final int msg_save=0x7f06009c;
-        public static final int photo_filename=0x7f060089;
-        public static final int photo_picker_tag=0x7f060087;
-        public static final int photo_picker_title=0x7f060088;
-        public static final int photo_profile_title=0x7f060083;
-        public static final int preference_key_unit_display=0x7f06006a;
-        public static final int privacy_setting_summary=0x7f060077;
-        public static final int privacy_setting_title=0x7f060076;
-        public static final int relationship=0x7f06004e;
+        public static final int location_client_ulr_inactive_age_under_13=0x7f060038;
+        public static final int location_client_ulr_inactive_age_unknown=0x7f060039;
+        public static final int location_client_ulr_inactive_unknown_restriction=0x7f06003a;
+        public static final int login=0x7f060054;
+        public static final int login_intro=0x7f060056;
+        public static final int logout=0x7f060055;
+        public static final int mile_per_hr=0x7f060075;
+        public static final int miles=0x7f060073;
+        public static final int misc_title=0x7f060081;
+        public static final int msg_cancel=0x7f0600a7;
+        public static final int msg_later=0x7f0600a9;
+        public static final int msg_save=0x7f0600a8;
+        /**  My Tracks service 
+         */
+        public static final int mytracks_service_class=0x7f060024;
+        public static final int mytracks_service_package=0x7f060025;
+        public static final int photo_filename=0x7f060095;
+        public static final int photo_picker_tag=0x7f060093;
+        public static final int photo_picker_title=0x7f060094;
+        public static final int photo_profile_title=0x7f06008f;
+        public static final int preference_key_unit_display=0x7f060076;
+        public static final int privacy_setting_summary=0x7f060083;
+        public static final int privacy_setting_title=0x7f060082;
+        public static final int read_track_data_permission=0x7f06001c;
+        public static final int relationship=0x7f06005a;
         public static final int release_signature=0x7f060000;
-        public static final int sdefault=0x7f06002f;
-        public static final int select_birthday=0x7f06008c;
-        public static final int settingsTab_title=0x7f06006d;
-        public static final int startTab_title=0x7f06006b;
-        public static final int string_miles=0x7f06005e;
-        public static final int test=0x7f06008d;
-        public static final int title_Class=0x7f060093;
-        public static final int title_Email=0x7f060090;
-        public static final int title_Gender=0x7f060092;
-        public static final int title_Major=0x7f060094;
-        public static final int title_Name=0x7f06008e;
-        public static final int title_Phone=0x7f060097;
-        public static final int title_birthday=0x7f06008a;
-        public static final int title_button_alert_cancel=0x7f06005c;
-        public static final int title_button_alert_ok=0x7f06005b;
-        public static final int title_button_cancel=0x7f060053;
-        public static final int title_button_save=0x7f060052;
-        public static final int title_dialog_calories=0x7f060058;
-        public static final int title_dialog_comment=0x7f06005a;
-        public static final int title_dialog_date=0x7f060054;
-        public static final int title_dialog_distance=0x7f060057;
-        public static final int title_dialog_duration=0x7f060056;
-        public static final int title_dialog_heart_rate=0x7f060059;
-        public static final int title_dialog_time=0x7f060055;
-        public static final int title_display_activity_type=0x7f06005f;
-        public static final int title_display_calorie=0x7f060063;
-        public static final int title_display_comment=0x7f060065;
-        public static final int title_display_date_time=0x7f060060;
-        public static final int title_display_distance=0x7f060062;
-        public static final int title_display_duration=0x7f060061;
-        public static final int title_display_heart_rate=0x7f060064;
-        public static final int ui_collector_button_delete_title=0x7f06003d;
-        public static final int ui_collector_button_start_title=0x7f06003b;
-        public static final int ui_collector_button_stop_title=0x7f06003c;
-        public static final int ui_collector_radio_cloud_title=0x7f060037;
-        public static final int ui_collector_radio_other_title=0x7f06003a;
-        public static final int ui_collector_radio_running_title=0x7f060039;
-        public static final int ui_collector_radio_shade_title=0x7f060034;
-        public static final int ui_collector_radio_standing_title=0x7f060036;
-        public static final int ui_collector_radio_sun_title=0x7f060035;
-        public static final int ui_collector_radio_walking_title=0x7f060038;
-        public static final int ui_collector_toast_file_deleted=0x7f06003e;
-        public static final int ui_sensor_service_notification_content=0x7f060041;
-        public static final int ui_sensor_service_notification_ticker=0x7f06003f;
-        public static final int ui_sensor_service_notification_title=0x7f060040;
-        public static final int ui_sensor_service_toast_error_file_saving_failed=0x7f060044;
-        public static final int ui_sensor_service_toast_success_file_created=0x7f060043;
-        public static final int ui_sensor_service_toast_success_file_updated=0x7f060042;
-        public static final int unit_preference_dialogTitle=0x7f06007a;
-        public static final int unit_preference_summary=0x7f060078;
-        public static final int unit_preference_title=0x7f060079;
-        public static final int user_profile_summary=0x7f060081;
-        public static final int user_profile_title=0x7f060080;
-        public static final int uviTab_title=0x7f06006e;
+        public static final int sdefault=0x7f06003b;
+        public static final int select_birthday=0x7f060098;
+        public static final int settingsTab_title=0x7f060079;
+        public static final int startTab_title=0x7f060077;
+        public static final int string_miles=0x7f06006a;
+        public static final int test=0x7f060099;
+        public static final int title_Class=0x7f06009f;
+        public static final int title_Email=0x7f06009c;
+        public static final int title_Gender=0x7f06009e;
+        public static final int title_Major=0x7f0600a0;
+        public static final int title_Name=0x7f06009a;
+        public static final int title_Phone=0x7f0600a3;
+        public static final int title_birthday=0x7f060096;
+        public static final int title_button_alert_cancel=0x7f060068;
+        public static final int title_button_alert_ok=0x7f060067;
+        public static final int title_button_cancel=0x7f06005f;
+        public static final int title_button_save=0x7f06005e;
+        public static final int title_dialog_calories=0x7f060064;
+        public static final int title_dialog_comment=0x7f060066;
+        public static final int title_dialog_date=0x7f060060;
+        public static final int title_dialog_distance=0x7f060063;
+        public static final int title_dialog_duration=0x7f060062;
+        public static final int title_dialog_heart_rate=0x7f060065;
+        public static final int title_dialog_time=0x7f060061;
+        public static final int title_display_activity_type=0x7f06006b;
+        public static final int title_display_calorie=0x7f06006f;
+        public static final int title_display_comment=0x7f060071;
+        public static final int title_display_date_time=0x7f06006c;
+        public static final int title_display_distance=0x7f06006e;
+        public static final int title_display_duration=0x7f06006d;
+        public static final int title_display_heart_rate=0x7f060070;
+        /**  Broadcast 
+         */
+        public static final int track_id_broadcast_extra=0x7f06001e;
+        public static final int track_paused_broadcast_action=0x7f06001f;
+        public static final int track_resumed_broadcast_action=0x7f060020;
+        public static final int track_started_broadcast_action=0x7f060021;
+        public static final int track_stopped_broadcast_action=0x7f060022;
+        public static final int track_update_broadcast_action=0x7f060023;
+        public static final int ui_collector_button_delete_title=0x7f060049;
+        public static final int ui_collector_button_start_title=0x7f060047;
+        public static final int ui_collector_button_stop_title=0x7f060048;
+        public static final int ui_collector_radio_cloud_title=0x7f060043;
+        public static final int ui_collector_radio_other_title=0x7f060046;
+        public static final int ui_collector_radio_running_title=0x7f060045;
+        public static final int ui_collector_radio_shade_title=0x7f060040;
+        public static final int ui_collector_radio_standing_title=0x7f060042;
+        public static final int ui_collector_radio_sun_title=0x7f060041;
+        public static final int ui_collector_radio_walking_title=0x7f060044;
+        public static final int ui_collector_toast_file_deleted=0x7f06004a;
+        public static final int ui_sensor_service_notification_content=0x7f06004d;
+        public static final int ui_sensor_service_notification_ticker=0x7f06004b;
+        public static final int ui_sensor_service_notification_title=0x7f06004c;
+        public static final int ui_sensor_service_toast_error_file_saving_failed=0x7f060050;
+        public static final int ui_sensor_service_toast_success_file_created=0x7f06004f;
+        public static final int ui_sensor_service_toast_success_file_updated=0x7f06004e;
+        public static final int unit_preference_dialogTitle=0x7f060086;
+        public static final int unit_preference_summary=0x7f060084;
+        public static final int unit_preference_title=0x7f060085;
+        public static final int user_profile_summary=0x7f06008d;
+        public static final int user_profile_title=0x7f06008c;
+        public static final int uviTab_title=0x7f06007a;
+        public static final int write_track_data_permission=0x7f06001d;
     }
     public static final class style {
         /** 
@@ -883,7 +906,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
-          @attr name android:bottomLabelHeight
+          @attr name edu.dartmouth.cs.myruns5:bottomLabelHeight
         */
         public static final int ChartView_bottomLabelHeight = 7;
         /**
@@ -895,7 +918,7 @@ in (inches), mm (millimeters).
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name android:gridLineColor
+          @attr name edu.dartmouth.cs.myruns5:gridLineColor
         */
         public static final int ChartView_gridLineColor = 0;
         /**
@@ -908,7 +931,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
-          @attr name android:gridLineWidth
+          @attr name edu.dartmouth.cs.myruns5:gridLineWidth
         */
         public static final int ChartView_gridLineWidth = 1;
         /**
@@ -919,7 +942,7 @@ in (inches), mm (millimeters).
           <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be an integer value, such as "<code>100</code>".
-          @attr name android:gridLinesHorizontal
+          @attr name edu.dartmouth.cs.myruns5:gridLinesHorizontal
         */
         public static final int ChartView_gridLinesHorizontal = 2;
         /**
@@ -930,7 +953,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be an integer value, such as "<code>100</code>".
-          @attr name android:gridLinesVertical
+          @attr name edu.dartmouth.cs.myruns5:gridLinesVertical
         */
         public static final int ChartView_gridLinesVertical = 3;
         /**
@@ -943,7 +966,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
-          @attr name android:leftLabelWidth
+          @attr name edu.dartmouth.cs.myruns5:leftLabelWidth
         */
         public static final int ChartView_leftLabelWidth = 4;
         /**
@@ -956,7 +979,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
-          @attr name android:rightLabelWidth
+          @attr name edu.dartmouth.cs.myruns5:rightLabelWidth
         */
         public static final int ChartView_rightLabelWidth = 6;
         /**
@@ -969,7 +992,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
-          @attr name android:topLabelHeight
+          @attr name edu.dartmouth.cs.myruns5:topLabelHeight
         */
         public static final int ChartView_topLabelHeight = 5;
         /** Attributes that can be used with a MapAttrs.
@@ -1025,7 +1048,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:cameraBearing
+          @attr name edu.dartmouth.cs.myruns5:cameraBearing
         */
         public static final int MapAttrs_cameraBearing = 1;
         /**
@@ -1039,7 +1062,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:cameraTargetLat
+          @attr name edu.dartmouth.cs.myruns5:cameraTargetLat
         */
         public static final int MapAttrs_cameraTargetLat = 2;
         /**
@@ -1053,7 +1076,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:cameraTargetLng
+          @attr name edu.dartmouth.cs.myruns5:cameraTargetLng
         */
         public static final int MapAttrs_cameraTargetLng = 3;
         /**
@@ -1067,7 +1090,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:cameraTilt
+          @attr name edu.dartmouth.cs.myruns5:cameraTilt
         */
         public static final int MapAttrs_cameraTilt = 4;
         /**
@@ -1081,7 +1104,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:cameraZoom
+          @attr name edu.dartmouth.cs.myruns5:cameraZoom
         */
         public static final int MapAttrs_cameraZoom = 5;
         /**
@@ -1101,7 +1124,7 @@ containing a value of this type.
 <tr><td><code>terrain</code></td><td>3</td><td></td></tr>
 <tr><td><code>hybrid</code></td><td>4</td><td></td></tr>
 </table>
-          @attr name android:mapType
+          @attr name edu.dartmouth.cs.myruns5:mapType
         */
         public static final int MapAttrs_mapType = 0;
         /**
@@ -1115,7 +1138,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:uiCompass
+          @attr name edu.dartmouth.cs.myruns5:uiCompass
         */
         public static final int MapAttrs_uiCompass = 6;
         /**
@@ -1129,7 +1152,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:uiRotateGestures
+          @attr name edu.dartmouth.cs.myruns5:uiRotateGestures
         */
         public static final int MapAttrs_uiRotateGestures = 7;
         /**
@@ -1143,7 +1166,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:uiScrollGestures
+          @attr name edu.dartmouth.cs.myruns5:uiScrollGestures
         */
         public static final int MapAttrs_uiScrollGestures = 8;
         /**
@@ -1157,7 +1180,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:uiTiltGestures
+          @attr name edu.dartmouth.cs.myruns5:uiTiltGestures
         */
         public static final int MapAttrs_uiTiltGestures = 9;
         /**
@@ -1171,7 +1194,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:uiZoomControls
+          @attr name edu.dartmouth.cs.myruns5:uiZoomControls
         */
         public static final int MapAttrs_uiZoomControls = 10;
         /**
@@ -1185,7 +1208,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:uiZoomGestures
+          @attr name edu.dartmouth.cs.myruns5:uiZoomGestures
         */
         public static final int MapAttrs_uiZoomGestures = 11;
         /**
@@ -1199,7 +1222,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:useViewLifecycle
+          @attr name edu.dartmouth.cs.myruns5:useViewLifecycle
         */
         public static final int MapAttrs_useViewLifecycle = 12;
         /**
@@ -1213,7 +1236,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:zOrderOnTop
+          @attr name edu.dartmouth.cs.myruns5:zOrderOnTop
         */
         public static final int MapAttrs_zOrderOnTop = 13;
         /** Attributes that can be used with a TextView.
@@ -1249,7 +1272,7 @@ containing a value of this type.
 <tr><td><code>medium</code></td><td>64</td><td></td></tr>
 <tr><td><code>thin</code></td><td>128</td><td></td></tr>
 </table>
-          @attr name android:textStyle
+          @attr name edu.dartmouth.cs.myruns5:textStyle
         */
         public static final int TextView_textStyle = 0;
         /** Attributes that can be used with a com_facebook_friend_picker_fragment.
@@ -1276,7 +1299,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:multi_select
+          @attr name edu.dartmouth.cs.myruns5:multi_select
         */
         public static final int com_facebook_friend_picker_fragment_multi_select = 0;
         /** Attributes that can be used with a com_facebook_login_view.
@@ -1309,7 +1332,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:confirm_logout
+          @attr name edu.dartmouth.cs.myruns5:confirm_logout
         */
         public static final int com_facebook_login_view_confirm_logout = 0;
         /**
@@ -1323,7 +1346,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:fetch_user_info
+          @attr name edu.dartmouth.cs.myruns5:fetch_user_info
         */
         public static final int com_facebook_login_view_fetch_user_info = 1;
         /**
@@ -1337,7 +1360,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:login_text
+          @attr name edu.dartmouth.cs.myruns5:login_text
         */
         public static final int com_facebook_login_view_login_text = 2;
         /**
@@ -1351,7 +1374,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:logout_text
+          @attr name edu.dartmouth.cs.myruns5:logout_text
         */
         public static final int com_facebook_login_view_logout_text = 3;
         /** Attributes that can be used with a com_facebook_picker_fragment.
@@ -1387,7 +1410,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:done_button_background
+          @attr name edu.dartmouth.cs.myruns5:done_button_background
         */
         public static final int com_facebook_picker_fragment_done_button_background = 6;
         /**
@@ -1401,7 +1424,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:done_button_text
+          @attr name edu.dartmouth.cs.myruns5:done_button_text
         */
         public static final int com_facebook_picker_fragment_done_button_text = 4;
         /**
@@ -1415,7 +1438,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:extra_fields
+          @attr name edu.dartmouth.cs.myruns5:extra_fields
         */
         public static final int com_facebook_picker_fragment_extra_fields = 1;
         /**
@@ -1429,7 +1452,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:show_pictures
+          @attr name edu.dartmouth.cs.myruns5:show_pictures
         */
         public static final int com_facebook_picker_fragment_show_pictures = 0;
         /**
@@ -1443,7 +1466,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:show_title_bar
+          @attr name edu.dartmouth.cs.myruns5:show_title_bar
         */
         public static final int com_facebook_picker_fragment_show_title_bar = 2;
         /**
@@ -1453,7 +1476,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:title_bar_background
+          @attr name edu.dartmouth.cs.myruns5:title_bar_background
         */
         public static final int com_facebook_picker_fragment_title_bar_background = 5;
         /**
@@ -1467,7 +1490,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:title_text
+          @attr name edu.dartmouth.cs.myruns5:title_text
         */
         public static final int com_facebook_picker_fragment_title_text = 3;
         /** Attributes that can be used with a com_facebook_place_picker_fragment.
@@ -1500,7 +1523,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:radius_in_meters
+          @attr name edu.dartmouth.cs.myruns5:radius_in_meters
         */
         public static final int com_facebook_place_picker_fragment_radius_in_meters = 0;
         /**
@@ -1514,7 +1537,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:results_limit
+          @attr name edu.dartmouth.cs.myruns5:results_limit
         */
         public static final int com_facebook_place_picker_fragment_results_limit = 1;
         /**
@@ -1528,7 +1551,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:search_text
+          @attr name edu.dartmouth.cs.myruns5:search_text
         */
         public static final int com_facebook_place_picker_fragment_search_text = 2;
         /**
@@ -1542,7 +1565,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:show_search_box
+          @attr name edu.dartmouth.cs.myruns5:show_search_box
         */
         public static final int com_facebook_place_picker_fragment_show_search_box = 3;
         /** Attributes that can be used with a com_facebook_profile_picture_view.
@@ -1571,7 +1594,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:is_cropped
+          @attr name edu.dartmouth.cs.myruns5:is_cropped
         */
         public static final int com_facebook_profile_picture_view_is_cropped = 1;
         /**
@@ -1589,7 +1612,7 @@ containing a value of this type.
 <tr><td><code>normal</code></td><td>-3</td><td></td></tr>
 <tr><td><code>large</code></td><td>-4</td><td></td></tr>
 </table>
-          @attr name android:preset_size
+          @attr name edu.dartmouth.cs.myruns5:preset_size
         */
         public static final int com_facebook_profile_picture_view_preset_size = 0;
     };

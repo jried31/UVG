@@ -71,27 +71,27 @@ public final class R {
 		public static final int terrain = 0x7f05000c;
 	}
 	public static final class string {
-		public static final int auth_client_availability_notification_title = 0x7f060029;
-		public static final int auth_client_play_services_err_notification_msg = 0x7f06002a;
-		public static final int auth_client_requested_by_msg = 0x7f06002b;
-		public static final int common_google_play_services_enable_button = 0x7f060020;
-		public static final int common_google_play_services_enable_text = 0x7f06001f;
-		public static final int common_google_play_services_enable_title = 0x7f06001e;
-		public static final int common_google_play_services_install_button = 0x7f06001d;
-		public static final int common_google_play_services_install_text_phone = 0x7f06001b;
-		public static final int common_google_play_services_install_text_tablet = 0x7f06001c;
-		public static final int common_google_play_services_install_title = 0x7f06001a;
-		public static final int common_google_play_services_unknown_issue = 0x7f060023;
-		public static final int common_google_play_services_unsupported_text = 0x7f060025;
-		public static final int common_google_play_services_unsupported_title = 0x7f060024;
-		public static final int common_google_play_services_update_button = 0x7f060026;
-		public static final int common_google_play_services_update_text = 0x7f060022;
-		public static final int common_google_play_services_update_title = 0x7f060021;
-		public static final int common_signin_button_text = 0x7f060027;
-		public static final int common_signin_button_text_long = 0x7f060028;
-		public static final int location_client_ulr_inactive_age_under_13 = 0x7f06002c;
-		public static final int location_client_ulr_inactive_age_unknown = 0x7f06002d;
-		public static final int location_client_ulr_inactive_unknown_restriction = 0x7f06002e;
+		public static final int auth_client_availability_notification_title = 0x7f060035;
+		public static final int auth_client_play_services_err_notification_msg = 0x7f060036;
+		public static final int auth_client_requested_by_msg = 0x7f060037;
+		public static final int common_google_play_services_enable_button = 0x7f06002c;
+		public static final int common_google_play_services_enable_text = 0x7f06002b;
+		public static final int common_google_play_services_enable_title = 0x7f06002a;
+		public static final int common_google_play_services_install_button = 0x7f060029;
+		public static final int common_google_play_services_install_text_phone = 0x7f060027;
+		public static final int common_google_play_services_install_text_tablet = 0x7f060028;
+		public static final int common_google_play_services_install_title = 0x7f060026;
+		public static final int common_google_play_services_unknown_issue = 0x7f06002f;
+		public static final int common_google_play_services_unsupported_text = 0x7f060031;
+		public static final int common_google_play_services_unsupported_title = 0x7f060030;
+		public static final int common_google_play_services_update_button = 0x7f060032;
+		public static final int common_google_play_services_update_text = 0x7f06002e;
+		public static final int common_google_play_services_update_title = 0x7f06002d;
+		public static final int common_signin_button_text = 0x7f060033;
+		public static final int common_signin_button_text_long = 0x7f060034;
+		public static final int location_client_ulr_inactive_age_under_13 = 0x7f060038;
+		public static final int location_client_ulr_inactive_age_unknown = 0x7f060039;
+		public static final int location_client_ulr_inactive_unknown_restriction = 0x7f06003a;
 	}
 	public static final class styleable {
 		public static final int[] MapAttrs = { 0x7f01001b, 0x7f01001c, 0x7f01001d, 0x7f01001e, 0x7f01001f, 0x7f010020, 0x7f010021, 0x7f010022, 0x7f010023, 0x7f010024, 0x7f010025, 0x7f010026, 0x7f010027, 0x7f010028 };
