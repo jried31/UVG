@@ -57,7 +57,11 @@
          <activity 
             android:name="edu.dartmouth.cs.myruns5.MainActivity" 
             android:label="@string/app_name"/>
-  
+         
+  <activity android:name="org.achartengine.GraphicalActivity" />
+  <activity 
+            android:name="edu.dartmouth.cs.myruns5.ChartActivity" 
+            android:label="@string/app_name"/>
         <activity
             android:name="edu.dartmouth.cs.myruns5.ProfileActivity"
             android:label="@string/app_name">    

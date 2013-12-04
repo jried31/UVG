@@ -74,8 +74,10 @@ public class GraphFragment extends Fragment {
 	}
 	
 	private void showGraphActivity() {
-	Intent intent = new Intent(getActivity(),GraphActivity.class);
-	//	Intent intent = new Intent(this, UserDetails.class);
+//	Intent intent = new Intent(getActivity(),GraphActivity.class);
+	
+		
+		Intent intent = new Intent(getActivity(),ChartActivity.class);
 		startActivity(intent);
 	}
 	
