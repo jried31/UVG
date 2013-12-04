@@ -123,7 +123,7 @@
     <string name="historyTab_title">HISTORY</string>
     <string name="settingsTab_title">SETTINGS</string>
     <string name="uviTab_title">UVI</string>
-    <string name="graphTab_title">GRAPH</string>
+    <string name="graphTab_title">RELATIVE</string>
     
     <string name="StartFragment_prompt">impatient, huh?</string>
     <string name="HistoryFragment_prompt">brand new era!</string>
