@@ -843,7 +843,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:cameraBearing
+          @attr name android:cameraBearing
         */
         public static final int MapAttrs_cameraBearing = 1;
         /**
@@ -857,7 +857,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:cameraTargetLat
+          @attr name android:cameraTargetLat
         */
         public static final int MapAttrs_cameraTargetLat = 2;
         /**
@@ -871,7 +871,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:cameraTargetLng
+          @attr name android:cameraTargetLng
         */
         public static final int MapAttrs_cameraTargetLng = 3;
         /**
@@ -885,7 +885,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:cameraTilt
+          @attr name android:cameraTilt
         */
         public static final int MapAttrs_cameraTilt = 4;
         /**
@@ -899,7 +899,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:cameraZoom
+          @attr name android:cameraZoom
         */
         public static final int MapAttrs_cameraZoom = 5;
         /**
@@ -919,7 +919,7 @@ containing a value of this type.
 <tr><td><code>terrain</code></td><td>3</td><td></td></tr>
 <tr><td><code>hybrid</code></td><td>4</td><td></td></tr>
 </table>
-          @attr name edu.dartmouth.cs.myruns5:mapType
+          @attr name android:mapType
         */
         public static final int MapAttrs_mapType = 0;
         /**
@@ -933,7 +933,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:uiCompass
+          @attr name android:uiCompass
         */
         public static final int MapAttrs_uiCompass = 6;
         /**
@@ -947,7 +947,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:uiRotateGestures
+          @attr name android:uiRotateGestures
         */
         public static final int MapAttrs_uiRotateGestures = 7;
         /**
@@ -961,7 +961,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:uiScrollGestures
+          @attr name android:uiScrollGestures
         */
         public static final int MapAttrs_uiScrollGestures = 8;
         /**
@@ -975,7 +975,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:uiTiltGestures
+          @attr name android:uiTiltGestures
         */
         public static final int MapAttrs_uiTiltGestures = 9;
         /**
@@ -989,7 +989,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:uiZoomControls
+          @attr name android:uiZoomControls
         */
         public static final int MapAttrs_uiZoomControls = 10;
         /**
@@ -1003,7 +1003,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:uiZoomGestures
+          @attr name android:uiZoomGestures
         */
         public static final int MapAttrs_uiZoomGestures = 11;
         /**
@@ -1017,7 +1017,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:useViewLifecycle
+          @attr name android:useViewLifecycle
         */
         public static final int MapAttrs_useViewLifecycle = 12;
         /**
@@ -1031,7 +1031,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:zOrderOnTop
+          @attr name android:zOrderOnTop
         */
         public static final int MapAttrs_zOrderOnTop = 13;
         /** Attributes that can be used with a com_facebook_friend_picker_fragment.
@@ -1058,7 +1058,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:multi_select
+          @attr name android:multi_select
         */
         public static final int com_facebook_friend_picker_fragment_multi_select = 0;
         /** Attributes that can be used with a com_facebook_login_view.
@@ -1091,7 +1091,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:confirm_logout
+          @attr name android:confirm_logout
         */
         public static final int com_facebook_login_view_confirm_logout = 0;
         /**
@@ -1105,7 +1105,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:fetch_user_info
+          @attr name android:fetch_user_info
         */
         public static final int com_facebook_login_view_fetch_user_info = 1;
         /**
@@ -1119,7 +1119,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:login_text
+          @attr name android:login_text
         */
         public static final int com_facebook_login_view_login_text = 2;
         /**
@@ -1133,7 +1133,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:logout_text
+          @attr name android:logout_text
         */
         public static final int com_facebook_login_view_logout_text = 3;
         /** Attributes that can be used with a com_facebook_picker_fragment.
@@ -1169,7 +1169,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.dartmouth.cs.myruns5:done_button_background
+          @attr name android:done_button_background
         */
         public static final int com_facebook_picker_fragment_done_button_background = 6;
         /**
@@ -1183,7 +1183,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:done_button_text
+          @attr name android:done_button_text
         */
         public static final int com_facebook_picker_fragment_done_button_text = 4;
         /**
@@ -1197,7 +1197,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:extra_fields
+          @attr name android:extra_fields
         */
         public static final int com_facebook_picker_fragment_extra_fields = 1;
         /**
@@ -1211,7 +1211,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:show_pictures
+          @attr name android:show_pictures
         */
         public static final int com_facebook_picker_fragment_show_pictures = 0;
         /**
@@ -1225,7 +1225,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:show_title_bar
+          @attr name android:show_title_bar
         */
         public static final int com_facebook_picker_fragment_show_title_bar = 2;
         /**
@@ -1235,7 +1235,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name edu.dartmouth.cs.myruns5:title_bar_background
+          @attr name android:title_bar_background
         */
         public static final int com_facebook_picker_fragment_title_bar_background = 5;
         /**
@@ -1249,7 +1249,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:title_text
+          @attr name android:title_text
         */
         public static final int com_facebook_picker_fragment_title_text = 3;
         /** Attributes that can be used with a com_facebook_place_picker_fragment.
@@ -1282,7 +1282,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:radius_in_meters
+          @attr name android:radius_in_meters
         */
         public static final int com_facebook_place_picker_fragment_radius_in_meters = 0;
         /**
@@ -1296,7 +1296,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:results_limit
+          @attr name android:results_limit
         */
         public static final int com_facebook_place_picker_fragment_results_limit = 1;
         /**
@@ -1310,7 +1310,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:search_text
+          @attr name android:search_text
         */
         public static final int com_facebook_place_picker_fragment_search_text = 2;
         /**
@@ -1324,7 +1324,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:show_search_box
+          @attr name android:show_search_box
         */
         public static final int com_facebook_place_picker_fragment_show_search_box = 3;
         /** Attributes that can be used with a com_facebook_profile_picture_view.
@@ -1353,7 +1353,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name edu.dartmouth.cs.myruns5:is_cropped
+          @attr name android:is_cropped
         */
         public static final int com_facebook_profile_picture_view_is_cropped = 1;
         /**
@@ -1371,7 +1371,7 @@ containing a value of this type.
 <tr><td><code>normal</code></td><td>-3</td><td></td></tr>
 <tr><td><code>large</code></td><td>-4</td><td></td></tr>
 </table>
-          @attr name edu.dartmouth.cs.myruns5:preset_size
+          @attr name android:preset_size
         */
         public static final int com_facebook_profile_picture_view_preset_size = 0;
     };
