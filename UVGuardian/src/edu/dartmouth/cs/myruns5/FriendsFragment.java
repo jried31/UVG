@@ -42,8 +42,8 @@ public class FriendsFragment extends ListFragment {
 		
 		//Test Parse initialization for grabbing Facebook friends
 		Parse.initialize(getActivity(), "2zU6YnzC8DLSMJFuAOiLNr3MD6X0ryG52mZsxoo0", "m4rlzlSWyUvgcEkNULlVqRBlsX2iGRilskltCqYG");
-		ParseFacebookUtils.initialize("613060905424062");
-		
+	//ParseFacebookUtils.initialize("613060905424062");
+		ParseFacebookUtils.initialize("1429856927242803");
 		selectedItems = new ArrayList<Integer>();
 		fbFriends = new ArrayList<ParseUser>();
 		
