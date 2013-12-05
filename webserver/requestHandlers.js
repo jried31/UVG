@@ -1,8 +1,6 @@
 var querystring = require("querystring");
 var Parse = require('parse').Parse;
 Parse.initialize("FJh8TX7N2OTxGVF2q48DurWCyDHLrwxnjw6M5Ode", "sdtkeolKRnqKVIm4pKF18gFANJtGqn9vdeG8Iuk7");
-//Testing Parse
-//Parse.initialize("MhJINKBigO3KrDEZLGvS2ovztfC2JVtHj2mYHDLg", "lWuGKFhLblqWiN26gUJPDy8iZza1YSkN6hICRpy5");
 
 var UVData = Parse.Object.extend("UVData");
 var query = new Parse.Query(UVData);
@@ -30,7 +28,7 @@ function upload(response, postData) {
   
   //convert GMT to current time
   var current_hour=current_date.getHours();
- console.log(current_date+" "+current_hour);
+  console.log(current_date+" "+current_hour);
   
   // check the time whether it is between 6 am to 6 pm
   if(current_hour>END_HOUR)
@@ -41,7 +39,6 @@ function upload(response, postData) {
     try {
       var result = JSON.parse(postData);
       var data = parseFloat(result.uv);
-      data=Math.random()*10;
       test.set("UID", 1);
       test.set("UV_index", data);
      
