@@ -242,8 +242,7 @@ public class UserDetailsActivity extends Activity {
 		      // the current user
 		      try {
 				List<ParseObject> friendUsers = friendQuery.find();
-				ParseUser currentUser = ParseUser
-						.getCurrentUser();
+				ParseUser currentUser = ParseUser.getCurrentUser();
 				currentUser.put("fb_friends", friendUsers);
 				currentUser.saveInBackground();
 				

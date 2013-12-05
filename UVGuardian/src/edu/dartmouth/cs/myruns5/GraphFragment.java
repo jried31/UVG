@@ -62,12 +62,9 @@ public class GraphFragment extends Fragment {
 	}
 	
 	public void showFriendsList() {
-		
-		//Context context = getApplicationContext();
 		Context context = getActivity();
 		CharSequence text = "Opening friends list!";
 		int duration = Toast.LENGTH_SHORT;
-
 		Toast toast = Toast.makeText(context, text, duration);
 		toast.show();
 		

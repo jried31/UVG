@@ -33,7 +33,7 @@ public class LoginActivity extends Activity {
 		 ParseFacebookUtils.initialize("613060905424062");
 		 
 		 loginButton = (Button) findViewById(R.id.loginButton);
-		loginButton.setOnClickListener(new View.OnClickListener() {
+		 loginButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				onLoginButtonClicked();
