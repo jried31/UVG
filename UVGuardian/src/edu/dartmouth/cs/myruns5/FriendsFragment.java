@@ -24,8 +24,17 @@ import com.parse.ParseUser;
 public class FriendsFragment extends ListFragment {
 
 	Toast m_currentToast;
-	public ArrayList<Integer> selectedItems;
+	private ArrayList<Integer> selectedItems; // Used to figure which index of fbFriends to access
+	private ArrayList<ParseUser> fbFriends; // Stores all Facebook Friends that user is Friends with
 
+	public ArrayList<Integer> getSelectedItems(){
+		return selectedItems;
+	}
+	
+	public ArrayList<ParseUser> getFBFriends(){
+		return fbFriends;
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -35,9 +44,8 @@ public class FriendsFragment extends ListFragment {
 		Parse.initialize(getActivity(), "2zU6YnzC8DLSMJFuAOiLNr3MD6X0ryG52mZsxoo0", "m4rlzlSWyUvgcEkNULlVqRBlsX2iGRilskltCqYG");
 		ParseFacebookUtils.initialize("613060905424062");
 		
-		// Initializes ArrayList containing the position of Facebook Friends in the list
-		// so that they can be referenced later accordingly
 		selectedItems = new ArrayList<Integer>();
+		fbFriends = new ArrayList<ParseUser>();
 		
 		return friendsMain;
 	}
@@ -47,9 +55,10 @@ public class FriendsFragment extends ListFragment {
     super.onActivityCreated(savedInstanceState);
     
     getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
-        @Override
+        
         // Puts the position of the item that was selected into selectedItem
         // Toggles whether or not a friend was added or not
+    	@Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         	if(selectedItems.contains((Integer)position)){
         		showToast("Friend Removed!");
@@ -61,14 +70,14 @@ public class FriendsFragment extends ListFragment {
             return true;
         }
     });
-
-    ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
+    
     ParseUser currentUser = ParseUser.getCurrentUser();
     ArrayList<String> friends = new ArrayList<String>();
-        
+
     if(currentUser!=null) {
-    	String userName = currentUser.getString("name");
-    	ArrayList<ParseUser> fbFriends = (ArrayList<ParseUser>)currentUser.get("fb_friends");
+    	fbFriends = (ArrayList<ParseUser>)currentUser.get("fb_friends");
+    	
+    	// Adds all the names to populate the Friends List
     	for(ParseUser user : fbFriends) {
     		friends.add((String)user.get("name"));
     	}
@@ -89,7 +98,7 @@ public class FriendsFragment extends ListFragment {
     // do nothing (do not add friend) on single click 
   }
   
-  void showToast(String text) {
+  private void showToast(String text) {
 	  //get rid of current toast before showing the next message
       if(m_currentToast != null)
           m_currentToast.cancel();

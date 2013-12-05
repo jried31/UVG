@@ -1,24 +1,35 @@
 package edu.dartmouth.cs.myruns5;
 
+import java.util.ArrayList;
+
 import org.achartengine.ChartFactory;
 import org.achartengine.chart.BarChart.Type;
 import org.achartengine.model.CategorySeries;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
+
+import com.parse.ParseUser;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 
 public class BarGraph{
 
+	private ArrayList<Integer> selectedItems; // Used to figure which index of fbFriends to access
+	private ArrayList<ParseUser> fbFriends; // Stores all Facebook Friends that user is Friends with
 	
 	//there should be a color array here with 5 different colors
 		// that specify 5 different people (user + 4 friends)
 	
+	public BarGraph(ArrayList<Integer> selectedItems, ArrayList<ParseUser> fbFriends){
+		
+	}
+	
 	public Intent getIntent(Context context) 
 	{	
-		
+
 		// Bar 1
 		int[] y = { 124, 135, 443, 456, 234, 123, 342, 134, 123, 643, 234, 274 };
 		CategorySeries series = new CategorySeries("Demo Bar Graph 1");
@@ -86,8 +97,4 @@ public class BarGraph{
 		Intent intent = ChartFactory.getBarChartIntent(context, dataset,mRenderer, Type.DEFAULT);
 		return intent;
 	}
-	
-	
-	
-
 }

@@ -1,6 +1,11 @@
 package edu.dartmouth.cs.myruns5;
 
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import com.parse.ParseUser;
+
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -15,13 +20,14 @@ import android.widget.Toast;
 
 
 
-public class GraphFragment extends Fragment {
-
+public class GraphFragment extends Fragment implements Serializable {
+	private FriendsFragment friendsFragment;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
+		friendsFragment = new FriendsFragment();
 		LinearLayout graphMain;
 		
 		graphMain= (LinearLayout)inflater.inflate(R.layout.fragment_graph_main, container, false);
@@ -55,9 +61,16 @@ public class GraphFragment extends Fragment {
 
 	}
 	
+	// Switches Intent to Chart Activity
+	// Passes along the selected array along with the all the user's Facebook friends
 	private void showGraphActivity() {
-
+		System.out.println("STARTING CHART ACTIVITY INTENT: 1");
 		Intent intent = new Intent(getActivity(),ChartActivity.class);
+		System.out.println("STARTING CHART ACTIVITY INTENT: 2");
+		intent.putExtra("selectedItems", friendsFragment.getSelectedItems());
+		System.out.println("STARTING CHART ACTIVITY INTENT: 3");
+		intent.putExtra("fbFriends", friendsFragment.getFBFriends());
+		System.out.println("STARTING CHART ACTIVITY INTENT: 4");
 		startActivity(intent);
 	}
 	
@@ -68,7 +81,7 @@ public class GraphFragment extends Fragment {
 		Toast toast = Toast.makeText(context, text, duration);
 		toast.show();
 		
-		FriendsFragment friendsFragment = new FriendsFragment();
+		friendsFragment = new FriendsFragment();
 		
 		FragmentTransaction ft  = getFragmentManager().beginTransaction();
 		ft.replace(((ViewGroup)getView().getParent()).getId(), friendsFragment);
