@@ -2,7 +2,6 @@ package edu.dartmouth.cs.myruns5;
 
 import java.util.ArrayList;
 
-import org.json.simple.parser.JSONParser;
 
 import android.app.ListFragment;
 import android.os.Bundle;
@@ -25,7 +24,6 @@ import com.parse.ParseUser;
 public class FriendsFragment extends ListFragment {
 
 	Toast m_currentToast;
-	JSONParser parser;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,9 +33,6 @@ public class FriendsFragment extends ListFragment {
 		//Test Parse initialization for grabbing Facebook friends
 		Parse.initialize(getActivity(), "2zU6YnzC8DLSMJFuAOiLNr3MD6X0ryG52mZsxoo0", "m4rlzlSWyUvgcEkNULlVqRBlsX2iGRilskltCqYG");
 		ParseFacebookUtils.initialize("613060905424062");
-		
-		//Initialize JSON Parser
-		parser = new JSONParser();
 		
 		return friendsMain;
 	}
