@@ -61,6 +61,7 @@ public class FriendsFragment extends ListFragment {
     	@Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         	if(selectedItems.contains((Integer)position)){
+        		selectedItems.remove((Integer)position);
         		showToast("Friend Removed!");
         	}
         	else{
