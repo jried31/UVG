@@ -24,6 +24,7 @@ import com.parse.ParseUser;
 public class FriendsFragment extends ListFragment {
 
 	Toast m_currentToast;
+	public ArrayList<Integer> selectedItems;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,6 +35,10 @@ public class FriendsFragment extends ListFragment {
 		Parse.initialize(getActivity(), "2zU6YnzC8DLSMJFuAOiLNr3MD6X0ryG52mZsxoo0", "m4rlzlSWyUvgcEkNULlVqRBlsX2iGRilskltCqYG");
 		ParseFacebookUtils.initialize("613060905424062");
 		
+		// Initializes ArrayList containing the position of Facebook Friends in the list
+		// so that they can be referenced later accordingly
+		selectedItems = new ArrayList<Integer>();
+		
 		return friendsMain;
 	}
 	
@@ -43,8 +48,16 @@ public class FriendsFragment extends ListFragment {
     
     getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
         @Override
+        // Puts the position of the item that was selected into selectedItem
+        // Toggles whether or not a friend was added or not
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-            showToast("Friend added to chart!");
+        	if(selectedItems.contains((Integer)position)){
+        		showToast("Friend Removed!");
+        	}
+        	else{
+        		selectedItems.add(position);
+        		showToast("Friend added to chart!");
+        	}
             return true;
         }
     });
