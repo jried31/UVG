@@ -24,7 +24,8 @@ public class BarGraph{
 		// that specify 5 different people (user + 4 friends)
 	
 	public BarGraph(ArrayList<Integer> selectedItems, ArrayList<ParseUser> fbFriends){
-		
+		selectedItems = this.selectedItems;
+		fbFriends = this.fbFriends;
 	}
 	
 	public Intent getIntent(Context context) 
