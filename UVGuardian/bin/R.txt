@@ -165,12 +165,12 @@ int id Spinner_InputType 0x7f050040
 int id avatar 0x7f05001c
 int id avg_speed_stats 0x7f050013
 int id bottom_buttons 0x7f050018
-int id button_add_friend 0x7f05003e
+int id button_add_friend 0x7f05003f
 int id button_cancel 0x7f050010
 int id button_map_cancel 0x7f05001a
 int id button_map_save 0x7f050019
 int id button_save 0x7f05000f
-int id button_show_graph 0x7f05003f
+int id button_show_graph 0x7f05003e
 int id calories_stats 0x7f050016
 int id climb_stats_stats 0x7f050015
 int id com_facebook_login_activity_progress_bar 0x7f05002b

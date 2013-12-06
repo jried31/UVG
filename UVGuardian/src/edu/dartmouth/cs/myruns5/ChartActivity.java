@@ -33,9 +33,9 @@ public class ChartActivity extends Activity{
 	
 	public void DisplayChart()
 	{
-		BarGraph bar = new BarGraph(selectedItems, fbFriends);
-    	Intent lineIntent = bar.getIntent(this);
-        startActivity(lineIntent);
+//		BarGraph bar = new BarGraph(selectedItems, fbFriends);
+//    	Intent lineIntent = bar.getIntent(this);
+//      startActivity(lineIntent);
 	}
 	
 }

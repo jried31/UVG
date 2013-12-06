@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -43,7 +45,15 @@ public class FriendsFragment extends ListFragment{
 			Bundle savedInstanceState) {
 		LinearLayout friendsMain = (LinearLayout)inflater.inflate(R.layout.fragment_friends, container, false);
 		
-		//Test Parse initialization for grabbing Facebook friends
+		Button showGraph = (Button) friendsMain.findViewById(R.id.button_show_graph);
+        showGraph.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //Show bar graph on click
+           	 	showGraphActivity();
+            }
+        });
+		
+		//Initialize Parsefor grabbing Facebook friends
 		Parse.initialize(getActivity(), "2zU6YnzC8DLSMJFuAOiLNr3MD6X0ryG52mZsxoo0", "m4rlzlSWyUvgcEkNULlVqRBlsX2iGRilskltCqYG");
 		ParseFacebookUtils.initialize(((Integer)R.string.app_id).toString());
 		
@@ -97,7 +107,7 @@ public class FriendsFragment extends ListFragment{
     	}
     }
     else {
-    	//not logged in, so do nothing
+    	//Not logged in, so do nothing
     	friends.add("NO FRIENDS :[");
     }
     
@@ -113,10 +123,22 @@ public class FriendsFragment extends ListFragment{
   }
   
   private void showToast(String text) {
-	  //get rid of current toast before showing the next message
+	  //Get rid of current toast before showing the next message
       if(m_currentToast != null)
           m_currentToast.cancel();
       m_currentToast = Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT);
       m_currentToast.show();
   }
+  
+  	//Switches Intent to Chart Activity
+	//Passes along the selected array along with the all the user's Facebook friends
+	private void showGraphActivity() {
+		Intent intent = new Intent(getActivity(),BarGraph.class);
+		intent.putExtra("selectedItems", getSelectedItems());
+		//intent.putExtra("fbFriends", getFBFriends());
+		
+		startActivity(intent);
+	}
+	
+  
 } 
