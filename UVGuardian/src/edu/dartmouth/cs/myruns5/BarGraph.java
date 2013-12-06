@@ -33,23 +33,21 @@ public class BarGraph extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragment_graph_main);
+		//setContentView(R.layout.fragment_friends);
 		
 		//Initialize Parse for grabbing Facebook friends
 		Parse.initialize(this, "2zU6YnzC8DLSMJFuAOiLNr3MD6X0ryG52mZsxoo0", "m4rlzlSWyUvgcEkNULlVqRBlsX2iGRilskltCqYG");
 		ParseFacebookUtils.initialize(((Integer)R.string.app_id).toString());
 		currentUser = ParseUser.getCurrentUser();
-		
-    	
 		fbFriends = (ArrayList<ParseUser>)currentUser.get("fb_friends");
 		
 		Intent intent = getIntent();
-		
 		selectedItems = (ArrayList<Integer>) intent.getSerializableExtra("selectedItems");
+
+		//Don't use Serializable for ParseUser objects due to errors
 		//fbFriends = (ArrayList<ParseUser>) intent.getSerializableExtra("fbFriends");
+		
 		displayChart();
-		
-		
 	}
 	
 	public void displayChart() {	

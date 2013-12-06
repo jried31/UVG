@@ -26,12 +26,14 @@ public class FriendsFragment extends ListFragment{
 	Toast m_currentToast;
 	final int MAX_ADDED_FRIENDS = 4;
 	private int numAddedFriends;
+	private boolean canAddFriend;
 	private ArrayList<Integer> selectedItems; // Used to figure which index of fbFriends to access
 	private ArrayList<ParseUser> fbFriends; // Stores all Facebook friends that user is Friends with
 	private ArrayList<String> friends; //Stores all Facebook friends that use UV Guardian
 	private ParseUser currentUser; 
 	ArrayAdapter<String> adapter;
-	
+
+	/*
 	public ArrayList<Integer> getSelectedItems() {
 		return selectedItems;
 	}
@@ -39,11 +41,14 @@ public class FriendsFragment extends ListFragment{
 	public ArrayList<ParseUser> getFBFriends() {
 		return fbFriends;
 	}
+	*/
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		LinearLayout friendsMain = (LinearLayout)inflater.inflate(R.layout.fragment_friends, container, false);
+		
+		canAddFriend = true;
 		
 		Button showGraph = (Button) friendsMain.findViewById(R.id.button_show_graph);
         showGraph.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +58,7 @@ public class FriendsFragment extends ListFragment{
             }
         });
 		
-		//Initialize Parsefor grabbing Facebook friends
+		//Initialize Parse for grabbing Facebook friends
 		Parse.initialize(getActivity(), "2zU6YnzC8DLSMJFuAOiLNr3MD6X0ryG52mZsxoo0", "m4rlzlSWyUvgcEkNULlVqRBlsX2iGRilskltCqYG");
 		ParseFacebookUtils.initialize(((Integer)R.string.app_id).toString());
 		
@@ -76,6 +81,12 @@ public class FriendsFragment extends ListFragment{
         // Toggles whether or not a friend was added or not
     	@Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+    		
+    		//In case the List Fragment is populated with no friends, prevent adding friends
+    		if(!canAddFriend) {
+    			return true;
+    		}
+    		
         	if(selectedItems.contains((Integer)position)){
         		selectedItems.remove((Integer)position);
         		friends.set(position,friends.get(position).substring(0,friends.get(position).indexOf(" (+)")));
@@ -98,23 +109,24 @@ public class FriendsFragment extends ListFragment{
     });
 
     if(currentUser!=null) {
+    	canAddFriend = true;
     	fbFriends = (ArrayList<ParseUser>)currentUser.get("fb_friends");
     	
-    	// Adds all the names to populate the Friends List
+    	// Adds all the names to populate the friends List Fragment
     	for(ParseUser user : fbFriends) {
-    		//No internet connectivity may lead to crash here (accessing Parse DB)
+    		//No internet connectivity may lead to crash here (accessing Parse DB); implement check?
     		friends.add((String)user.get("name"));
     	}
     }
     else {
-    	//Not logged in, so do nothing
+    	//Not logged in, so do nothing and disable adding friends to graph
+    	canAddFriend = false;
     	friends.add("NO FRIENDS :[");
     }
     
 	adapter = new ArrayAdapter<String>(getActivity(), 
 			android.R.layout.simple_list_item_1, friends);
 	setListAdapter(adapter);
-    
   }
 
   @Override
@@ -130,12 +142,15 @@ public class FriendsFragment extends ListFragment{
       m_currentToast.show();
   }
   
-  	//Switches Intent to Chart Activity
-	//Passes along the selected array along with the all the user's Facebook friends
+  	//Switches Intent to Bar Graph
+	//Passes along the array of selected friend indexes
 	private void showGraphActivity() {
 		Intent intent = new Intent(getActivity(),BarGraph.class);
-		intent.putExtra("selectedItems", getSelectedItems());
-		//intent.putExtra("fbFriends", getFBFriends());
+		intent.putExtra("selectedItems", selectedItems);
+		
+		//No need for put/get Extra's in terms of ParseUser Facebook friends
+		//BarGraph regrabs Facebook friends using the current Parse user to prevent misuse of Serialization 
+		//intent.putExtra("fbFriends", fbFriends);
 		
 		startActivity(intent);
 	}
