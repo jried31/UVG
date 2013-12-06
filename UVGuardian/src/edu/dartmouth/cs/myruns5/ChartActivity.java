@@ -12,10 +12,11 @@ import android.os.Bundle;
 
 
 //This class is used to call the BarGraph class
-public class ChartActivity extends Activity implements Serializable{
+public class ChartActivity extends Activity{
 	
 	private ArrayList<Integer> selectedItems; // Used to figure which index of fbFriends to access
 	private ArrayList<ParseUser> fbFriends; // Stores all Facebook Friends that user is Friends with
+	private ParseUser user;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +33,9 @@ public class ChartActivity extends Activity implements Serializable{
 	
 	public void DisplayChart()
 	{
-		
 		BarGraph bar = new BarGraph(selectedItems, fbFriends);
     	Intent lineIntent = bar.getIntent(this);
         startActivity(lineIntent);
-	
 	}
 	
 }

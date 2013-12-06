@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 
 
-public class GraphFragment extends Fragment implements Serializable {
+public class GraphFragment extends Fragment {
 	private FriendsFragment friendsFragment;
 	
 	@Override
@@ -64,13 +64,9 @@ public class GraphFragment extends Fragment implements Serializable {
 	// Switches Intent to Chart Activity
 	// Passes along the selected array along with the all the user's Facebook friends
 	private void showGraphActivity() {
-		System.out.println("STARTING CHART ACTIVITY INTENT: 1");
 		Intent intent = new Intent(getActivity(),ChartActivity.class);
-		System.out.println("STARTING CHART ACTIVITY INTENT: 2");
 		intent.putExtra("selectedItems", friendsFragment.getSelectedItems());
-		System.out.println("STARTING CHART ACTIVITY INTENT: 3");
 		intent.putExtra("fbFriends", friendsFragment.getFBFriends());
-		System.out.println("STARTING CHART ACTIVITY INTENT: 4");
 		startActivity(intent);
 	}
 	
