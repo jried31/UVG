@@ -16,7 +16,7 @@ var set=true;
 // Control Variables
 var START_HOUR=6;
 var END_HOUR=19;
-
+var INITIAL_HOUR=6;
 function upload(response, postData) {
   console.log("Request handler 'upload' was called.");
   var time = require('time');
@@ -39,27 +39,29 @@ function upload(response, postData) {
     try {
       var result = JSON.parse(postData);
       var data = parseFloat(result.uv);
-      test.set("UID", 1);
-      test.set("UV_index", data);
-     
-      if(current_hour==18 && set){
+      data=(Math.random()*100)%12;   
+      if(current_hour==INITIAL_HOUR && set){
           var energy=data*25;
           test.set("UV_Accumulative_Energy",energy);
+          test.set("UID",1);
+          test.set("UV_index",data);
           console.log("once !! "+ energy);
           set =false;
          
       }else{
           // query constraints        
           console.log("later !!");
-          query.descending("createdAt");
-          query.limit(10);
+         
           query.equalTo("UID", 1);
-          query.find({
+          query.descending('updatedAt');
+          query.first({
               success: function(results) {
-              console.log("Successfully retrieved " + results.length + " scores.");
-              var currEnergy=data*25+parseFloat(results[0].get('UV_Accumulative_Energy'));
+              console.log("Successfully retrieved " + results.updatedAt+ " "+results.get('UV_Accumulative_Energy')+" ");
+              var currEnergy=data*25+parseFloat(results.get('UV_Accumulative_Energy'));
               console.log("result "+currEnergy);
               test.set("UV_Accumulative_Energy",currEnergy);
+              test.set("UID",1);
+              test.set("UV_index",data);
               test.save();
           },
               error: function(error) {
