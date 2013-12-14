@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/current_uvi_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+<<<<<<< HEAD
+        android:orientation="vertical" 
+        >
+        
+=======
+        android:orientation="vertical" >
+
+>>>>>>> 41caeac9d001c06e34ff3e61ed5c48033055001e
+        <TextView
+            android:id="@+id/current_uvi_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+<<<<<<< HEAD
+            android:layout_marginTop="30dp"
+=======
+            android:layout_margin="10dp"
+>>>>>>> 41caeac9d001c06e34ff3e61ed5c48033055001e
+            android:text="@string/current_uvi_title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="40sp" />
+
+<<<<<<< HEAD
+      	<TextView
+=======
+        <TextView
+>>>>>>> 41caeac9d001c06e34ff3e61ed5c48033055001e
+            android:id="@+id/current_uvi"
+            android:layout_width="210dp"
+            android:layout_height="210dp"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:background="@drawable/circle_white"
+            android:gravity="center"
+            android:shadowColor="@android:color/white"
+            android:shadowRadius="10.0"
+            android:text="-1"
+            android:textColor="@color/white"
+            android:textSize="70sp" />
+<<<<<<< HEAD
+        
+
+        <ImageView
+            android:id="@+id/uvi_scale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/current_uvi_description"
+            android:src="@drawable/uviscale1" />
+=======
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/current_uvi_description"
+            android:src="@drawable/uviscale" />
+>>>>>>> 41caeac9d001c06e34ff3e61ed5c48033055001e
+    </LinearLayout>
+
+</ScrollView>
